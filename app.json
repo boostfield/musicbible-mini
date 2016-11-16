@@ -1,13 +1,27 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/record/record",
+    "pages/search/search",
     "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#3C372F",
+    "navigationBarTextStyle":"white",
+    "backgroundColor": "#C1B087"
+  },
+  "tabBar": {
+     "color":"#bebebe",
+    "selectedColor":"#72674E",
+    "borderStyle":"black",
+    "backgroundColor":"#C1B087",
+    "list": [{
+      "pagePath": "pages/record/record",
+      "text": "LP"
+    }, {
+      "pagePath": "pages/search/search",
+      "text": "搜索"
+    }]
   },
     "networkTimeout": {
     "request": 10000,
