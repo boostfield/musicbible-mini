@@ -8,7 +8,8 @@
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#3C372F",
     "navigationBarTextStyle":"white",
-    "backgroundColor": "#C1B087"
+    "backgroundColor": "#C1B087",
+    "navigationBarTitleText": "音乐圣经"
   },
   "tabBar": {
      "color":"#bebebe",
