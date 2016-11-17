@@ -1,2 +1,4 @@
 <view class="container">
+    <view class="seach-content">
+    </view>
 </view>

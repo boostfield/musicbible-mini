@@ -1,0 +1,10 @@
+/**search.wxss**/
+.container{
+  background: #312D26;
+  padding: 0;
+}
+
+.seach-content{
+    width: 100%;
+    height: 88rpx;
+}

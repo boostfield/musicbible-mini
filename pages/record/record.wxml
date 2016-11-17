@@ -11,7 +11,6 @@
   </view>
 </view>
 
-
   <!--推荐-->
   <view class="content content_01" hidden="{{tabSelect[0]}}">
       <view class="grid">
