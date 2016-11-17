@@ -1,0 +1,29 @@
+.container{
+    padding: 0;
+    background: #3C372F;
+}
+.scroll-view_H{
+    white-space: nowrap;
+    height: 431rpx;
+}
+
+.scroll-view-item_H{
+    display: inline-block;
+    height: 431rpx;
+    width: 431rpx;
+    margin-left: 40rpx;
+}
+
+.bc_green{
+    margin-left: 160rpx;
+    background: green;
+}
+.bc_red{
+    background: red;
+}
+.bc_yellow{
+    background: yellow;
+}
+.bc_blue{
+    background: blue;
+}
