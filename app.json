@@ -6,22 +6,26 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#3C372F",
+    "navigationBarBackgroundColor": "#312D26",
     "navigationBarTextStyle":"white",
     "backgroundColor": "#C1B087",
     "navigationBarTitleText": "音乐圣经"
   },
   "tabBar": {
-     "color":"#bebebe",
-    "selectedColor":"#72674E",
+    "color":"#736951",
+    "selectedColor":"#000000",
     "borderStyle":"black",
     "backgroundColor":"#C1B087",
     "list": [{
       "pagePath": "pages/record/record",
-      "text": "LP"
+      "text": "LP",
+      "iconPath":"image/ic_toolbar_lp_n.png",
+      "selectedIconPath":"image/ic_toolbar_lp_p.png"
     }, {
       "pagePath": "pages/search/search",
-      "text": "搜索"
+      "text": "搜索",
+      "iconPath":"image/ic_toolbar_search_n.png",
+      "selectedIconPath":"image/ic_toolbar_search_p.png"
     }]
   },
     "networkTimeout": {

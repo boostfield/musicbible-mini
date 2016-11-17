@@ -4,11 +4,11 @@ var app = getApp()
 Page({
   data: {
     isHideFooterLoading:true,
-    record_lp:[
+    record_recommed:[
       {
         imageCoverUrl:"https://github.com/CaoyangLee/BlankApp/blob/master/scence.jpg?raw=true",
-        title:"item01",
-        subTitle:"subTitle01"
+        title:"巴赫: 6首大提琴无伴圣诞节福利大家但是弗兰克紧身裤…",
+        subTitle:"BACH:Six Suites For Sol sjkfj jdslfjs fjlkdsj sdf s…"
       },
       {
         imageCoverUrl:"https://github.com/CaoyangLee/BlankApp/blob/master/scence.jpg?raw=true",
@@ -35,7 +35,13 @@ Page({
         title:"item06",
         subTitle:"subTitle06"
       },
-    ]
+    ],
+    record_latest:[],
+    tabSelect:[false,true],
+    indicatorDots: true,
+    autoplay: false,
+    interval: 4000,
+    duration: 1000,
   },
   //事件处理函数
   bindViewTap: function() {
@@ -45,14 +51,18 @@ Page({
   },
   onLoad: function () {
     console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo
+  },
+  //button recommend
+  recommend_onclick:function(){
+      this.setData({
+        tabSelect:[false,true]
       })
-    })
+  },
+  //button latest
+  latest_onclick:function(){
+      this.setData({
+        tabSelect:[true,false]
+      })
   },
   onPullDownRefresh:function(){
     console.log("xia la shua xin");

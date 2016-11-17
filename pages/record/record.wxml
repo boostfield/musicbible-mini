@@ -1,18 +1,53 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="grid">
-  <block  wx:for="{{record_lp}}">
-    <template is="items" data="{{...item}}"/>
-  </block>
+<view class="tablayout">
+  <view class="tab tab_recommend" bindtap="recommend_onclick">
+      <text class="title">推荐</text>
+      <view class="divider" hidden="{{tabSelect[0]}}"></view>
   </view>
-  <view class="loading" hidden="{{isHideFooterLoading}}"><text>加载中...</text></view>
+  <view class="tab tab_latest" bindtap="latest_onclick">
+      <text class="title">最新</text>
+      <view class="divider" hidden="{{tabSelect[1]}}"></view>
+  </view>
 </view>
 
-    <!--模板-->
-    <template name="items">
+
+  <!--推荐-->
+  <view class="content content_01" hidden="{{tabSelect[0]}}">
+      <view class="grid">
+        <block  wx:for="{{record_recommed}}">
+          <template is="grid-items" data="{{...item}}"/>
+        </block>
+      </view>
+      <view class="loading" hidden="{{isHideFooterLoading}}"><text>加载中...</text></view>
+  </view>
+    <!--最新-->
+  <view class="content content_02" hidden="{{tabSelect[1]}}">
+    <view class="list">
+            <block  wx:for="{{record_recommed}}">
+            <template is="list-items" data="{{...item}}"/>
+            </block>
+        </view>
+        <view class="loading" hidden="{{isHideFooterLoading}}"><text>加载中...</text></view>
+  </view>
+</view>
+
+    <!--推荐的模板-->
+    <template name="grid-items">
             <view class="scroll-view-item"  data-id="{{id}}" >
                       <image class="item-image" src="{{imageCoverUrl}}" mode="scaleToFill"></image>
                       <text class="title item-title">{{title}}</text>
                       <text  class="title item-subtitle">{{subTitle}}</text>
+            </view>
+      </template>
+
+          <!--最新的模板-->
+    <template name="list-items">
+            <view class="scroll-view-item"  data-id="{{id}}" >
+                      <image class="item-image" src="{{imageCoverUrl}}" mode="scaleToFill"></image>
+                      <view class="item-content">
+                      <text class="title item-title">{{title}}</text>
+                      <text  class="title item-subtitle">{{subTitle}}</text>
+                      </view>
             </view>
       </template>
