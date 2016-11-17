@@ -1,0 +1,5 @@
+<view>
+    1313123
+</view>
+
+<view style="text-align:center"> {{id}} </view>

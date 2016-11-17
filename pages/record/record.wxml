@@ -33,20 +33,20 @@
 
     <!--推荐的模板-->
     <template name="grid-items">
-            <view class="scroll-view-item"  data-id="{{id}}" >
+        <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
                       <image class="item-image" src="{{imageCoverUrl}}" mode="scaleToFill"></image>
                       <text class="title item-title">{{title}}</text>
                       <text  class="title item-subtitle">{{subTitle}}</text>
-            </view>
+        </navigator>
       </template>
 
           <!--最新的模板-->
     <template name="list-items">
-            <view class="scroll-view-item"  data-id="{{id}}" >
+            <navigator url="../record-detail/record-detail?id={id}" hover-class="navigator-hover">
                       <image class="item-image" src="{{imageCoverUrl}}" mode="scaleToFill"></image>
                       <view class="item-content">
                       <text class="title item-title">{{title}}</text>
                       <text  class="title item-subtitle">{{subTitle}}</text>
                       </view>
-            </view>
+           </navigator>
       </template>

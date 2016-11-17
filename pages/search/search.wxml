@@ -1,4 +1,16 @@
 <view class="container">
-    <view class="seach-content">
+    <!--search-->
+    <view class="seach-content" >
+        <view class="search-btn" >
+            <image src="../../image/ic_search.png" ></image>
+            <text>搜索</text>
+        </view>
+    </view>
+    <!--hot key words-->
+    <view class="hot-word-content">
+        <text class="title">热门关键词</text>
+        <block  wx:for="{{keywords}}">
+          <text class="name">{{item}}</text>
+        </block>
     </view>
 </view>

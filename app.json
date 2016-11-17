@@ -2,13 +2,13 @@
   "pages":[
     "pages/record/record",
     "pages/search/search",
-    "pages/logs/logs"
+    "pages/record-detail/record-detail"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#312D26",
     "navigationBarTextStyle":"white",
-    "backgroundColor": "#C1B087",
+    "backgroundColor": "#3C372F",
     "navigationBarTitleText": "音乐圣经"
   },
   "tabBar": {

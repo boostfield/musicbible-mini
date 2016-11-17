@@ -38,9 +38,9 @@
 }
 
 .content{
+  box-sizing: border-box;
   margin-top: 94rpx;
   background: #3C372F;
-  box-sizing: border-box;
   width: 100%;
 }
 
@@ -65,7 +65,7 @@
   display: flex;
 }
 
-.grid .scroll-view-item{
+.grid navigator{
   box-sizing: border-box;
   padding-top: 61rpx;
   padding-left: 30rpx;
@@ -75,16 +75,20 @@
   justify-content: center;
 }
 
-.list .scroll-view-item{
+.list navigator{
   box-sizing: border-box;
   display: flex;
-  padding: 30rpx;
+  padding-top: 30rpx;
+  padding-right: 30rpx;
+  padding-bottom: 30rpx;
   width: 100%;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   border-bottom: 1rpx solid rgba(255,255,255,0.2);
+  margin-left: 30rpx;
 }
+
 
 .grid  .item-image{
   width:100%;
