@@ -7,7 +7,7 @@ Page({
         selected:"",
         position:-1,
         id:1,
-        imageCoverUrl:"https://github.com/CaoyangLee/BlankApp/blob/master/scence.jpg?raw=true",
+        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
         title:"巴赫: 6首大提琴无伴圣诞节放水淀粉当时发生的首都发生的…",
         subTitle:"BACH:Six Suites For Sol fdsf dsf fsdf dsfsd sdfsd…"
       },
@@ -15,7 +15,7 @@ Page({
         selected:"",
          position:-1,
         id:2,
-        imageCoverUrl:"https://github.com/CaoyangLee/BlankApp/blob/master/scence.jpg?raw=true",
+        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
         title:"item02",
         subTitle:"subTitle02"
       },
@@ -23,7 +23,7 @@ Page({
         selected:"",
          position:-1,
         id:3,
-        imageCoverUrl:"https://github.com/CaoyangLee/BlankApp/blob/master/scence.jpg?raw=true",
+        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
         title:"item03",
         subTitle:"subTitle03"
       },
@@ -31,7 +31,7 @@ Page({
         selected:"",
          position:-1,
         id:4,
-        imageCoverUrl:"https://github.com/CaoyangLee/BlankApp/blob/master/scence.jpg?raw=true",
+        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
         title:"item04",
         subTitle:"subTitle04"
       },
@@ -39,7 +39,7 @@ Page({
          selected:"",
          position:-1,
         id:5,
-        imageCoverUrl:"https://github.com/CaoyangLee/BlankApp/blob/master/scence.jpg?raw=true",
+        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
         title:"item05",
         subTitle:"subTitle05"
       },
@@ -47,7 +47,7 @@ Page({
         selected:"",
          position:-1,
         id:6,
-        imageCoverUrl:"https://github.com/CaoyangLee/BlankApp/blob/master/scence.jpg?raw=true",
+        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
         title:"item06",
         subTitle:"subTitle06"
       },
@@ -57,35 +57,40 @@ Page({
     },
   scroll: function(e) {
     var pixelRatio=app.pixelRatio;
-    var realDistance = 430/pixelRatio;
+    var realDistance = 390/pixelRatio;
     var scrollLeft=e.detail.scrollLeft
     var scrollWidth= e.detail.scrollWidth;
     // console.log("realDistance  "+realDistance);
     // console.log("scrollWidth  "+scrollWidth);
     // console.log("scrollLeft  "+e.detail.scrollLeft);
-    if(!this.checkItem){
+    if(!this.data.checkItem){
        for(var i=0;i<this.data.tracklist.length;i++){
         this.data.tracklist[i].position=i*realDistance;
       }
-      this.checkItem=true;
+      this.setData({
+        checkItem:true
+      })
     }
     //开始处理 找出谁是current
-    for(var i=0;i<this.data.tracklist.length;i++){
+    var length=this.data.tracklist.length;
+    for(var i=0;i<length;i++){
       var postion=this.data.tracklist[i].position;
-      console.log("postion "+postion+" scrollLeft  "+scrollLeft);
       if(scrollLeft<postion){
+        console.log("postion "+postion+" scrollLeft  "+scrollLeft);
         var index = i-1;
         console.log("index "+index);
-        this.clearAllindex();
+        //this.clearAllindex();
         this.data.tracklist[index].selected="selected";
         return;
-      }
-      
-    }
-
-   
-    
-    
+      }else if(scrollLeft>=this.data.tracklist[length-1].position){
+        console.log("postion "+postion+" scrollLeft  "+scrollLeft);
+        var index =length-1;
+        console.log("index "+index);
+        //this.clearAllindex();
+        this.data.tracklist[index].selected="selected";
+        return;
+      }   
+    }  
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -112,9 +117,8 @@ Page({
   clearAllindex:function(){
     console.log("init dots");
       for(var i=0;i<this.data.tracklist.length;i++){
-        var item=this.data.tracklist[i];
-          item.selected="";
-          console.log("selected   "+i+"  "+item.selected);
+          this.data.tracklist[i].selected="";
+          console.log("selected   "+i+"  "+this.data.tracklist[i].selected);
     }
   }
 })
