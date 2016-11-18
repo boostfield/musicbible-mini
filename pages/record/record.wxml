@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container" >
 <view class="tablayout">
   <view class="tab tab_recommend" bindtap="recommend_onclick">
       <text class="title">推荐</text>

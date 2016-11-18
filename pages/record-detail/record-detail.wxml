@@ -1,8 +1,34 @@
   <view class="container">
-  <scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%">
-    <view id="green" class="scroll-view-item_H bc_green"></view>
-    <view id="red"  class="scroll-view-item_H bc_red"></view>
-    <view id="yellow" class="scroll-view-item_H bc_yellow"></view>
-    <view id="blue" class="scroll-view-item_H bc_blue"></view>
-  </scroll-view>
+        <scroll-view id="scroll" class="scroll-view_H" scroll-x="true" style="width: 100%"  bindscroll="scroll" scroll-left="{{scrollLeft}}" >
+          <block wx:for="{{tracklist}}">
+            <image id="{{item.id}}" class="scroll-view-item_H" src="{{item.imageCoverUrl}}"></image>
+          </block>
+        </scroll-view>
+        <view class="dots">
+          <block wx:for="{{tracklist}}">
+            <view class="dot {{item.selected}}" ></view>
+          </block>
+        </view>
+        <view class="text-content">
+          <text class="title">贝里尼：清教徒 选段贝里尼：清教徒 选段贝里尼：清教徒 选段贝里尼：清教徒 选段贝里尼：清教徒 选段</text>
+          <text class="subtitle">Bellini:I Puritani Highlights Bellini:I Puritani Highlights Bellini:I Puritani Highlights</text>
+            <view class="intro">
+              <text class="attribute">唱片简介：</text> <text class="value">LP</text>
+            </view>
+            <view class="number">
+              <text class="attribute">唱片编号：</text> <text class="value">LP</text>
+            </view>
+            <view class="year">
+              <text class="attribute">唱片年份：</text> <text class="value">LP</text>
+            </view>
+            <view class="lable">
+              <text class="attribute">唱片厂牌：</text> <text class="value">LP</text>
+            </view>
+            <view class="composor">
+              <text class="attribute">作曲家：</text> <text class="value">LP</text>
+            </view>
+            <view class="artist">
+              <text class="attribute">艺术家：</text> <text class="value">LP</text>
+            </view>
+        </view>
   </view>

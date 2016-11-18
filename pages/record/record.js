@@ -99,6 +99,9 @@ Page({
     this.setData({
         isHideFooterLoading:true
     });
+  },
+  getInfo:function(e){
+    console.log(e);
   }
 
 })
