@@ -52,7 +52,7 @@ Page({
         subTitle:"subTitle06"
       },
     ],
-    toView:"",
+    scrollLeft:1,
     checkItem:false,
     },
   scroll: function(e) {
@@ -83,13 +83,11 @@ Page({
         this.clearAllindex(currentList);
         currentList[index].selected="selected";
 
+        
          this.setData({
-         toView:currentList[index].id,
-          tracklist:currentList
+           scrollLeft:currentList[index].position,
+            tracklist:currentList
         })
-        // this.setData({
-        //   toView:"",
-        // })
         return;
       }else if(scrollLeft>=this.data.tracklist[currentList.length-1].position){
         console.log("postion "+postion+" scrollLeft  "+scrollLeft);
@@ -99,12 +97,9 @@ Page({
         currentList[index].selected="selected";
 
          this.setData({
-          toView:currentList[index].id,
-          tracklist:currentList
+            scrollLeft:currentList[index].position,
+            tracklist:currentList
         })
-      //  this.setData({
-      //     toView:"",
-      //   })
         return;
         
       }   
@@ -117,6 +112,7 @@ Page({
     })
     //初始化小数点
     if(this.data.tracklist.length!=0){
+      
         this.data.tracklist[0].selected="selected";
     }
   },
