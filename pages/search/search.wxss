@@ -14,21 +14,68 @@
     border-bottom: 1rpx solid rgba(255,255,255,0.2);
 }
 
-.search-btn{
+
+.seach-content.before .search-btn{
     width: 718rpx;
     height: 56rpx;
     background: #C1B087;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 10rpx;
 }
 
-.search-btn image{
+
+
+.seach-content.after .search-btn{
+    width: 634rpx;
+    height: 56rpx;
+    background: #C1B087;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10rpx;
+}
+
+.seach-content.after .btn-cancle{
+    font-size: 32rpx;
+    margin-left: 18rpx;
+    color: #C1B087;
+}
+
+.seach-content.before .search-btn image{
     width: 25rpx;
     height: 25rpx;
 }
-.search-btn text{
+
+.seach-content.after .content-left{
+    width: 584rpx;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.seach-content.after .icon-search{
+    width: 25rpx;
+    height: 25rpx;
+    margin-left: 16rpx;
+}
+
+.seach-content.after .edt-search{
+    width: 100%;
+    margin-left: 11rpx;
+    font-size: 26rpx;
+    color: #000000;
+    letter-spacing: 0.27px;
+}
+.seach-content.after .icon_delete{
+    width: 25rpx;
+    height: 25rpx;
+    margin-right: 16rpx;
+}
+
+.seach-content.before .search-btn text{
     font-size: 26rpx;
     margin-left: 10rpx;
     color: #000000;

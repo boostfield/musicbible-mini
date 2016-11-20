@@ -1,12 +1,25 @@
 <view class="container">
-    <!--search-->
-    <view class="seach-content" >
+    <!--search type01-->
+    <view class="seach-content before" bindtap="actionSearch" wx:if="{{!isShowRealSearchBar}}">
         <view class="search-btn" >
             <image src="../../image/ic_search.png" ></image>
             <text>搜索</text>
         </view>
     </view>
-    <!--hot key words-->
+
+    <!--search type02-->
+    <view class="seach-content after"  wx:if="{{isShowRealSearchBar}}">
+        <view class="search-btn" >
+            <view class="content-left">
+                <image class="icon-search" src="../../image/ic_search.png" ></image>
+                <input class="edt-search" placeholder="" auto-focus/>
+             </view>
+
+           <image class="icon_delete"src="../../image/ic_search_del.png" ></image>
+        </view>
+         <text class="btn-cancle"  bindtap="actionCancle" >取消</text>
+    </view>
+    <!--hot key words type01-->
     <view class="hot-word-content">
         <text class="title">热门关键词</text>
         <block  wx:for="{{keywords}}">
