@@ -12,10 +12,10 @@
         <view class="search-btn" >
             <view class="content-left">
                 <image class="icon-search" src="../../image/ic_search.png" ></image>
-                <input class="edt-search" placeholder="" auto-focus/>
+                <input class="edt-search" placeholder="" auto-focus bindinput="actionKeyInput"/>
              </view>
 
-           <image class="icon_delete"src="../../image/ic_search_del.png" ></image>
+           <image class="icon_delete"src="../../image/ic_search_del.png" bindtap="actionDeleteInputValue"></image>
         </view>
          <text class="btn-cancle"  bindtap="actionCancle" >取消</text>
     </view>
@@ -23,7 +23,7 @@
     <view class="hot-word-content">
         <text class="title">热门关键词</text>
         <block  wx:for="{{keywords}}">
-          <text class="name">{{item}}</text>
+          <text class="name" bindtap="actionHotWordSearch" data-hotkey="{{item}}">{{item}}</text>
         </block>
     </view>
 </view>
