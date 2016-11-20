@@ -84,6 +84,7 @@ Page({
         console.log("内容 "+e.detail.value);
         this.setData({
             isShowAssociateWords:true,
+            isShowRecordResult:false,
             searchContent:e.detail.value
         })
     },

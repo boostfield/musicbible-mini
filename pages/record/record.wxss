@@ -81,12 +81,12 @@
   padding-top: 30rpx;
   padding-right: 30rpx;
   padding-bottom: 30rpx;
-  width: 100%;
+  width: 720rpx;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1rpx solid rgba(255,255,255,0.2);
   margin-left: 30rpx;
+  border-bottom: 1rpx solid rgba(255,255,255,0.2);
 }
 
 
