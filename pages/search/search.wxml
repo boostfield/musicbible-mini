@@ -12,7 +12,7 @@
         <view class="search-btn" >
             <view class="content-left">
                 <image class="icon-search" src="../../image/ic_search.png" ></image>
-                <input class="edt-search" placeholder="" auto-focus bindinput="actionKeyInput"/>
+                <input class="edt-search" placeholder="" auto-focus bindinput="actionKeyInput" value="{{searchContent}}"/>
              </view>
 
            <image class="icon_delete"src="../../image/ic_search_del.png" bindtap="actionDeleteInputValue"></image>

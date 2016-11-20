@@ -19,7 +19,9 @@ Page({
     },
     actionDeleteInputValue:function(){
         //删除input内容
-         console.log("删除input内容");
+        this.setData({
+            searchContent:""
+        })
     },
     actionKeyInput:function(e){
         //输入搜索内容
@@ -33,6 +35,7 @@ Page({
         //点击热门词
         console.log("内容 "+e.currentTarget.dataset.hotkey);
         this.setData({
+            isShowRealSearchBar:true,
             searchContent:e.currentTarget.dataset.hotkey
         })
     }
