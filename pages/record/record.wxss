@@ -144,20 +144,6 @@
    color:rgba(255,255,255,0.3);
 }
 
-.loading{
-  background: #3C372F;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 30rpx;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-}
 
-.loading text{
-  font-size: 28rpx;
-}
 
 
