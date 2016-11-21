@@ -98,14 +98,14 @@
 
 .hot-word-content .title{
     font-size: 28rpx;
-    margin-bottom: 9rpx;
+    margin-bottom: 13.5rpx;
     color: rgba(255,255,255,0.4);
 }
 
 .hot-word-content .name{
     font-size: 32rpx;
     color: #C1B087;
-    margin-top: 20rpx;
+    margin-top: 30rpx;
     letter-spacing: 0.34rpx;
 }
 

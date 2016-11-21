@@ -54,6 +54,8 @@ Page({
     ],
     scrollLeft:1,
     checkItem:false,
+    previewCoverUrl:"",
+    isHidePreivew:true
     },
   scroll: function(e) {
     var pixelRatio=app.pixelRatio;
@@ -85,7 +87,7 @@ Page({
 
         
          this.setData({
-           scrollLeft:currentList[index].position,
+           //scrollLeft:currentList[index].position,
             tracklist:currentList
         })
         return;
@@ -97,7 +99,7 @@ Page({
         currentList[index].selected="selected";
 
          this.setData({
-            scrollLeft:currentList[index].position,
+            //scrollLeft:currentList[index].position,
             tracklist:currentList
         })
         return;
@@ -120,7 +122,7 @@ Page({
     // 页面渲染完成
   },
   onShow:function(){
-    // // 页面显示
+    // 页面显示
     
   },
   onHide:function(){
@@ -128,6 +130,21 @@ Page({
   },
   onUnload:function(){
     // 页面关闭
+  },
+  actionImagePreview:function(e){
+    //图片预览
+    var cover=e.currentTarget.dataset.cover;
+    this.setData({
+      previewCoverUrl:cover,
+      isHidePreivew:false
+    })
+    console.log(e);
+  },
+  closePreview:function(){
+    //关闭图片预览
+    this.setData({
+      isHidePreivew:true
+    })
   },
   clearAllindex:function(currentList){
       for(var i=0;i<currentList.length;i++){

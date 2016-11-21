@@ -1,34 +1,56 @@
-  <view class="container">
+  <view class="container" hidden="{{!isHidePreivew}}">
+
+      <!--scroll-view-->
         <scroll-view id="scroll" class="scroll-view_H" scroll-x="true" style="width: 100%"  bindscroll="scroll"  scroll-left="{{scrollLeft}}"  >
           <block wx:for="{{tracklist}}">
-            <image id="{{item.id}}" class="scroll-view-item_H" src="{{item.imageCoverUrl}}"></image>
+            <image id="{{item.id}}" class="scroll-view-item_H" src="{{item.imageCoverUrl}}" bindtap="actionImagePreview" data-cover="{{item.imageCoverUrl}}"></image>
           </block>
         </scroll-view>
+
+        <!--dots-->
         <view class="dots">
           <block wx:for="{{tracklist}}">
             <view class="dot {{item.selected}}" ></view>
           </block>
         </view>
+
+        <!-- record detail -->
         <view class="text-content">
           <text class="title">贝里尼：清教徒 选段贝里尼：清教徒 选段贝里尼：清教徒 选段贝里尼：清教徒 选段贝里尼：清教徒 选段</text>
           <text class="subtitle">Bellini:I Puritani Highlights Bellini:I Puritani Highlights Bellini:I Puritani Highlights</text>
-            <view class="intro">
-              <text class="attribute">唱片简介：</text> <text class="value">LP</text>
+            <view class="section intro">
+              <text class="attribute">唱片简介：</text> <text class="value">LP11111111111211111111111111111111111111111</text>
             </view>
-            <view class="number">
+            <view class="section number">
               <text class="attribute">唱片编号：</text> <text class="value">LP</text>
             </view>
-            <view class="year">
+            <view class="section year">
               <text class="attribute">唱片年份：</text> <text class="value">LP</text>
             </view>
-            <view class="lable">
+            <view class="section lable">
               <text class="attribute">唱片厂牌：</text> <text class="value">LP</text>
             </view>
-            <view class="composor">
+            <view class="section composor">
               <text class="attribute">作曲家：</text> <text class="value">LP</text>
             </view>
-            <view class="artist">
+            <view class="section artist">
               <text class="attribute">艺术家：</text> <text class="value">LP</text>
             </view>
         </view>
+
+       
   </view>
+
+   <!--image preview-->
+   <view class="preview" hidden="{{isHidePreivew}}">
+         <swiper class="swiper-body" indicator-dots="{{true}}"autoplay="{{false}}" interval="{{0}}" duration="{{0}}" bindtap="closePreview" >
+            <block wx:for="{{tracklist}}">
+              <swiper-item class="slide-item">
+                <image class="preview-image" src="{{item.imageCoverUrl}}"  mode="aspectFit"></image>
+              </swiper-item>
+            </block>
+        </swiper>
+   </view>
+
+
+
