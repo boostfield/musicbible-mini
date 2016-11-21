@@ -19,3 +19,10 @@ function formatNumber(n) {
 module.exports = {
   formatTime: formatTime
 }
+//检查期望参数长度是否与真是参数长度一致
+function checkArguments(args){
+  var actual=args.length;
+  var expected=args.callee.length;
+  if(actual!==expected)
+    throw Error("Expected "+expected+"args; got"+actual);
+}
