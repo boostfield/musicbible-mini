@@ -1,13 +1,19 @@
 //app.js
 App({
   pixelRatio:2,
-  testNumber:222,
   onLaunch: function () {
+    //小程序初始化
     //调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     this.getDeviceInfo();
+  },
+  onShow:function(){
+    //小程序显示
+  },
+  onHide:function(){
+    //小程序隐藏
   },
   getUserInfo:function(cb){
     var that = this
@@ -28,9 +34,12 @@ App({
     }
   },
   globalData:{
+    pixelRatio:2,
+    Host:'http://api.musicbible.com/api/v1',
     userInfo:null
   },
   getDeviceInfo:function(){
+    //获取设备信息
       try {
         var res = wx.getSystemInfoSync()
         console.log(res.model)

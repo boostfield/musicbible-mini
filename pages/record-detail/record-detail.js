@@ -58,7 +58,7 @@ Page({
     isHidePreivew:true
     },
   scroll: function(e) {
-    var pixelRatio=app.pixelRatio;
+    var pixelRatio=app.globalData.pixelRatio;
     var realDistance = 470/pixelRatio;
     var scrollLeft=e.detail.scrollLeft
     var scrollWidth= e.detail.scrollWidth;

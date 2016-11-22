@@ -40,7 +40,7 @@
         </navigator>
       </template>
 
-          <!--最新的模板-->
+    <!--最新的模板-->
     <template name="list-items">
             <navigator url="../record-detail/record-detail?id={id}" hover-class="navigator-hover">
                       <image class="item-image" src="{{imageCoverUrl}}" mode="scaleToFill"></image>
