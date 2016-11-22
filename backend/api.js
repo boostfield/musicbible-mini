@@ -1,11 +1,52 @@
+var app = getApp();
+
 module.exports = {
-    getTimeLineList: getTimeLineList
+    getRecommendReocrdList: getRecommendReocrdList,
+    getLatestRecordList:getLatestRecordList,
+    getHotKeyWords:getHotKeyWords,
+    getAssociateWords:getAssociateWords,
+    getSearchResultRecordList:getSearchResultRecordList,
+    getRecordDetail:getRecordDetail
 }
+
+
+//获取推荐LP列表
+function getRecommendReocrdList(header,data,sucess,fail){
+
+}
+
+//获取最新LP列表
+function getLatestRecordList(header,data,sucess,fail){
+
+}
+
+//获取热门关键词
+function getHotKeyWords(header,data,sucess,fail){
+
+}
+
+//获取搜索关联词列表 5个
+function getAssociateWords(header,data,sucess,fail){
+
+}
+
+//获取搜索结果列表
+function getSearchResultRecordList(header,data,sucess,fail){
+
+}
+
+//获取唱片详情页
+function getRecordDetail(header,data,sucess,fail){
+
+}
+
+
+
 
 
 //获取时间线列表
 function getTimeLineList(header,data,sucess,fail){
-    var url = getApp().globalData.mainhost+'/timelines/list';
+    var url = app.globalData.Host+'/timelines/list';
     wx.request({
         url:url,
         header:{

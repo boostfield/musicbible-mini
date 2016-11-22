@@ -14,7 +14,7 @@
   <!--推荐-->
   <view class="content content_01" hidden="{{tabSelect[0]}}">
       <view class="grid">
-        <block  wx:for="{{record_recommed}}">
+        <block  wx:for="{{record_recommed.list}}">
           <template is="grid-items" data="{{...item}}"/>
         </block>
       </view>
@@ -23,7 +23,7 @@
     <!--最新-->
   <view class="content content_02" hidden="{{tabSelect[1]}}">
     <view class="list">
-            <block  wx:for="{{record_recommed}}">
+            <block  wx:for="{{record_recommed.list}}">
             <template is="list-items" data="{{...item}}"/>
             </block>
         </view>
