@@ -93,9 +93,9 @@ Page({
       },function(res){
           if(isAdd){
             console.log('上拉刷新完成');
-                this.setData({
-                    isHideFooterLoading:true
-                });
+            this.setData({
+                 isHideFooterLoading:true
+            });
           }else{
             console.log('下拉刷新完成')
             wx.stopPullDownRefresh()
@@ -111,9 +111,9 @@ Page({
       },function(res){
           if(isAdd){
             console.log('上拉刷新完成');
-                this.setData({
-                    isHideFooterLoading:true
-                });
+            this.setData({
+                isHideFooterLoading:true
+             });
           }else{
             console.log('下拉刷新完成')
             wx.stopPullDownRefresh()

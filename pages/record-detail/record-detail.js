@@ -1,8 +1,17 @@
 var app = getApp()
 Page({
     data:{
+      record:{
       id:0,
-      tracklist:[
+      title:"title",
+      subtitle:"subTitle",
+      intro:"intro",
+      serialnumber:"serialnumber",
+      year:"year",
+      lable:"lable",
+      composor:"composor",
+      artist:"artist",
+      coverList:[
       {
         selected:"",
         position:-1,
@@ -51,7 +60,7 @@ Page({
         title:"item06",
         subTitle:"subTitle06"
       },
-    ],
+    ]},
     scrollLeft:1,
     checkItem:false,
     previewCoverUrl:"",
@@ -65,7 +74,7 @@ Page({
     // console.log("realDistance  "+realDistance);
     // console.log("scrollWidth  "+scrollWidth);
     // console.log("scrollLeft  "+e.detail.scrollLeft);
-    var currentList= this.data.tracklist;
+    var currentList= this.data.record.coverList;
     if(!this.data.checkItem){
        for(var i=0;i<currentList.length;i++){
         currentList[i].position=i*realDistance;
@@ -84,23 +93,23 @@ Page({
         console.log("index "+index);
         this.clearAllindex(currentList);
         currentList[index].selected="selected";
-
+        this.data.record.coverList = currentList
         
          this.setData({
            //scrollLeft:currentList[index].position,
-            tracklist:currentList
+            record:this.data.record
         })
         return;
-      }else if(scrollLeft>=this.data.tracklist[currentList.length-1].position){
+      }else if(scrollLeft>=this.data.record.coverList[currentList.length-1].position){
         console.log("postion "+postion+" scrollLeft  "+scrollLeft);
         var index =currentList.length-1;
         console.log("index "+index);
         this.clearAllindex(currentList);
         currentList[index].selected="selected";
-
+        this.data.record.coverList = currentList
          this.setData({
             //scrollLeft:currentList[index].position,
-            tracklist:currentList
+            record:this.data.record
         })
         return;
         
@@ -109,13 +118,14 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
+    this.record.id = options.id;
     this.setData({
-      id: options.id
+      record: this.record
     })
     //初始化小数点
-    if(this.data.tracklist.length!=0){
+    if(this.data.record.coverList.length!=0){
       
-        this.data.tracklist[0].selected="selected";
+        this.data.record.coverList[0].selected="selected";
     }
   },
   onReady:function(){
