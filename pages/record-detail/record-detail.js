@@ -71,6 +71,11 @@ Page({
   },
   onReady:function(){
     // 页面渲染完成
+
+    //让所有cover能刷新position
+    this.setData({
+      scrollLeft:this.data.scrollLeft+1
+    })
   },
   onShow:function(){
     // 页面显示
@@ -89,7 +94,6 @@ Page({
       previewCoverUrl:cover,
       isHidePreivew:false
     })
-    console.log(e);
   },
   closePreview:function(){
     //关闭图片预览
@@ -118,7 +122,6 @@ Page({
   },
   renderRecordDetailData:function(data){
     //渲染唱片详情数据
-    console.log(data.result);
     var recordObj=data.result;
     //唱片图片
     recordObj.AppCoverUrl=imageHelper.imageUrlDispatcher(recordObj.AppCoverUrl,imageHelper.DISKCOVER);
@@ -141,5 +144,5 @@ Page({
     if(this.data.record.Images.length!=0){
         this.data.record.Images[0].selected="selected";
     }
-  }
+  },
 })

@@ -32,6 +32,7 @@ Page({
     this.reqLatestData(this.renderLatestData,false,this);
   },
   reqRecommendData:function(callback,isAdd,currentPage){
+    wx.showNavigationBarLoading();
       if(isAdd){
         var index = currentPage.data.record_recommed.index+1;
       }else{
@@ -41,6 +42,7 @@ Page({
         page:index,
         pageSize:this.data.record_recommed.pageSize
       },function(res){
+        wx.hideNavigationBarLoading();
           if(isAdd){
              if(res.data.result.DataList.length>0){
               currentPage.data.record_recommed.index =index;
@@ -56,6 +58,7 @@ Page({
         console.log(res);
         callback && callback.call(null,res.data,isAdd)
       },function(res){
+         wx.hideNavigationBarLoading();
           if(isAdd){
             console.log('上拉刷新出现问题');
             currentPage.setData({
@@ -68,6 +71,7 @@ Page({
       })
   },
   reqLatestData:function(callback,isAdd,currentPage){
+      wx.showNavigationBarLoading();
      if(isAdd){
         var index = currentPage.data.record_latest.index+1;
       }else{
@@ -78,6 +82,7 @@ Page({
         page:index,
         pageSize:this.data.record_latest.pageSize
       },function(res){
+          wx.hideNavigationBarLoading();
           if(isAdd){
             if(res.data.result.DataList.length>0){
               currentPage.data.record_latest.index =index;
@@ -93,6 +98,7 @@ Page({
         console.log(res);
         callback && callback.call(null,res.data,isAdd)
       },function(res){
+          wx.hideNavigationBarLoading();
           if(isAdd){
             console.log('上拉刷新出现问题');
             currentPage.setData({
