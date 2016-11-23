@@ -43,7 +43,7 @@
 
    <!--image preview-->
    <view class="preview" hidden="{{isHidePreivew}}">
-         <swiper class="swiper-body" indicator-dots="{{true}}"autoplay="{{false}}" interval="{{0}}" duration="{{0}}" bindtap="closePreview" >
+         <swiper class="swiper-body" indicator-dots="{{true}}"autoplay="{{false}}" interval="{{0}}" duration="{{0}}" bindtap="closePreview" current="{{currentIndex}}" bindchange="onCurrentPageSelected" >
             <block wx:for="{{record.Images}}">
               <swiper-item class="slide-item">
                 <image class="preview-image" src="{{item.imageCoverUrl}}"  mode="aspectFit"></image>

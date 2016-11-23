@@ -4,6 +4,7 @@ var imageHelper = require('../../utils/imageHelper.js');
 var utils = require('../../utils/util.js');
 Page({
     data:{
+      currentIndex:0,
       record:{},
       scrollLeft:1,
       checkItem:false,
@@ -32,31 +33,32 @@ Page({
 
       var postion=currentList[i].position;
       if(scrollLeft<postion){
-        console.log("postion "+postion+" scrollLeft  "+scrollLeft);
+        //console.log("postion "+postion+" scrollLeft  "+scrollLeft);
         var index = i-1;
-        console.log("index "+index);
+        //console.log("index "+index);
         this.clearAllindex(currentList);
         currentList[index].selected="selected";
         this.data.record.Images = currentList
         
          this.setData({
            //scrollLeft:currentList[index].position,
-            record:this.data.record
+            record:this.data.record,
+            currentIndex:index
         })
         return;
       }else if(scrollLeft>=this.data.record.Images[currentList.length-1].position){
-        console.log("postion "+postion+" scrollLeft  "+scrollLeft);
+        //console.log("postion "+postion+" scrollLeft  "+scrollLeft);
         var index =currentList.length-1;
-        console.log("index "+index);
+        //console.log("index "+index);
         this.clearAllindex(currentList);
         currentList[index].selected="selected";
         this.data.record.Images = currentList
          this.setData({
             //scrollLeft:currentList[index].position,
-            record:this.data.record
+            record:this.data.record,
+            currentIndex:index
         })
         return;
-        
       }   
     }  
   },
@@ -145,4 +147,12 @@ Page({
         this.data.record.Images[0].selected="selected";
     }
   },
+  onCurrentPageSelected:function(e){
+    var index = e.detail.current;
+    console.log("~~~~");
+    console.log(index);
+    this.setData({
+      scrollLeft:this.data.record.Images[index].position
+    })
+  }
 })
