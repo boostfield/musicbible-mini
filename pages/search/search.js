@@ -1,4 +1,7 @@
 var app = getApp()
+var api = require('../../backend/api.js');
+var imageHelper = require('../../utils/imageHelper.js');
+var utils = require('../../utils/util.js');
 Page({
     data: {
         isHideFooterLoading:true,
@@ -8,6 +11,11 @@ Page({
         isShowAssociateWords:false,
         isShowRecordResult:false,
         searchContent:"",
+        record_search:{
+            index:1,
+            pageSize:10,
+            list:[]
+            },
         searchResultArray:[
         {
             imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
@@ -105,18 +113,20 @@ Page({
              isShowAssociateWords:false,
              searchContent:e.currentTarget.dataset.hotkey
         })
+        this.reqResultData(this.renderResultData,false,this);
     },
     onPullDownRefresh:function(){
-    console.log("xia la shua xin");
-    setTimeout(this.onPullDownRefreshSuccess,2000);
+        console.log("xia la shua xin");
+        setTimeout(this.onPullDownRefreshSuccess,2000);
     }, 
     onReachBottom: function () {
         console.log("shang la shua xin");
         this.setData({
             isHideFooterLoading:false
         });
+        this.reqResultData(this.renderResultData,true,this);
         //延迟加载
-        setTimeout(this.onBottomRefreshSucess,2000);
+        // setTimeout(this.onBottomRefreshSucess,2000);
     },
     onPullDownRefreshSuccess:function(){
         wx.stopPullDownRefresh();
@@ -125,5 +135,60 @@ Page({
         this.setData({
             isHideFooterLoading:true
         });
+    }, 
+    reqResultData:function(callback,isAdd,currentPage){
+    //请求搜索结果数据
+      if(isAdd){
+        var index = currentPage.data.record_search.index+1;
+      }else{
+        var index=1;
+      }
+      api.getSearchResultRecordList(null,{
+        keyword:this.data.searchContent,
+        page:index,
+        pageSize:this.data.record_search.pageSize
+      },function(res){
+          if(isAdd){
+             if(res.data.result.DataList.length>0){
+              currentPage.data.record_search.index =index;
+            }
+            console.log('上拉刷新完成');
+            currentPage.setData({
+                 isHideFooterLoading:true
+            });
+          }else{
+            console.log('下拉刷新完成')
+            wx.stopPullDownRefresh()
+          }
+        console.log(res);
+        callback && callback.call(null,res.data,isAdd)
+      },function(res){
+          if(isAdd){
+            console.log('上拉刷新出现问题');
+            currentPage.setData({
+                 isHideFooterLoading:true
+            });
+          }else{
+            console.log('下拉刷新出现问题')
+            wx.stopPullDownRefresh()
+          }
+      })
+  },  
+  renderResultData:function(res,isAdd){
+    //渲染搜索结果唱片数据
+    var recommendObj =this.data.record_search;
+    var list = res.result.DataList;
+    for (var i=0;i<list.length;i++)
+    {
+      //唱片图片
+      list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
     }
+    if(isAdd){
+      list = recommendObj.list.concat(list);
+    }
+    recommendObj.list=list;
+    this.setData({
+      record_search:recommendObj
+    })
+  }
 })

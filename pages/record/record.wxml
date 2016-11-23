@@ -42,7 +42,7 @@
 
     <!--最新的模板-->
     <template name="list-items">
-            <navigator url="../record-detail/record-detail?id={Id}" hover-class="navigator-hover">
+            <navigator url="../record-detail/record-detail?id={{Id}}" hover-class="navigator-hover">
                       <image class="item-image" src="{{AppCoverUrl}}" mode="scaleToFill"></image>
                       <view class="item-content">
                       <text class="title item-title">{{TitleCN?TitleCN:null}}</text>

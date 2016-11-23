@@ -34,7 +34,7 @@
               <text class="attribute">作曲家：</text> <text class="value">{{record.HiFiComposers[0]}}</text>
             </view>
             <view class="section artist">
-              <text class="attribute">艺术家：</text> <text class="value">{{record.HiFiArtists[0]}}</text>
+              <text class="attribute">艺术家：</text> <text class="value">{{record.HiFiArtists[0]?record.HiFiArtists[0]:null}}</text>
             </view>
         </view>
 
@@ -46,7 +46,7 @@
          <swiper class="swiper-body" indicator-dots="{{true}}"autoplay="{{false}}" interval="{{0}}" duration="{{0}}" bindtap="closePreview" >
             <block wx:for="{{record.Images}}">
               <swiper-item class="slide-item">
-                <image class="preview-image" src="{{item}}"  mode="aspectFit"></image>
+                <image class="preview-image" src="{{item.imageCoverUrl}}"  mode="aspectFit"></image>
               </swiper-item>
             </block>
         </swiper>

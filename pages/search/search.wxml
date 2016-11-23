@@ -39,8 +39,8 @@
     <!--search result-->
       <view class="content  fitSystemSartchBar" wx:if="{{isShowRecordResult}}">
                 <view class="list">
-                    <block  wx:for="{{searchResultArray}}">
-                    <template is="list-items" data="{{...item}}"/>
+                    <block  wx:for="{{record_search.list}}">
+                        <template is="list-items" data="{{...item}}"/>
                     </block>
                 </view>
                 <view class="loading" hidden="{{isHideFooterLoading}}"><text>加载中...</text></view>
@@ -48,11 +48,11 @@
 
     <!--搜索列表的模板-->              
     <template name="list-items">
-            <navigator url="../record-detail/record-detail?id={id}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{imageCoverUrl}}" mode="scaleToFill"></image>
+           <navigator url="../record-detail/record-detail?id={{Id}}" hover-class="navigator-hover">
+                      <image class="item-image" src="{{AppCoverUrl}}" mode="scaleToFill"></image>
                       <view class="item-content">
-                      <text class="title item-title">{{title}}</text>
-                      <text  class="title item-subtitle">{{subTitle}}</text>
+                      <text class="title item-title">{{TitleCN}}</text>
+                      <text  class="title item-subtitle">{{TitleEN}}</text>
                       </view>
            </navigator>
     </template>

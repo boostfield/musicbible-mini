@@ -4,70 +4,11 @@ var imageHelper = require('../../utils/imageHelper.js');
 var utils = require('../../utils/util.js');
 Page({
     data:{
-      record:{
-      id:0,
-      title:"title",
-      subtitle:"subTitle",
-      intro:"intro",
-      serialnumber:"serialnumber",
-      year:"year",
-      lable:"lable",
-      composor:"composor",
-      artist:"artist",
-      coverList:[
-      {
-        selected:"",
-        position:-1,
-        id:"item0",
-        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-        title:"巴赫: 6首大提琴无伴圣诞节放水淀粉当时发生的首都发生的…",
-        subTitle:"BACH:Six Suites For Sol fdsf dsf fsdf dsfsd sdfsd…"
-      },
-      {
-        selected:"",
-         position:-1,
-        id:"item1",
-        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-        title:"item02",
-        subTitle:"subTitle02"
-      },
-      {
-        selected:"",
-         position:-1,
-        id:"item2",
-        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-        title:"item03",
-        subTitle:"subTitle03"
-      },
-      {
-        selected:"",
-         position:-1,
-        id:"item3",
-        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-        title:"item04",
-        subTitle:"subTitle04"
-      },
-      {
-         selected:"",
-         position:-1,
-        id:"item4",
-        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-        title:"item05",
-        subTitle:"subTitle05"
-      },
-      {
-        selected:"",
-         position:-1,
-        id:"item5",
-        imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-        title:"item06",
-        subTitle:"subTitle06"
-      },
-    ]},
-    scrollLeft:1,
-    checkItem:false,
-    previewCoverUrl:"",
-    isHidePreivew:true
+      record:{},
+      scrollLeft:1,
+      checkItem:false,
+      previewCoverUrl:"",
+      isHidePreivew:true
     },
   scroll: function(e) {
     var pixelRatio=app.globalData.pixelRatio;
@@ -190,7 +131,6 @@ Page({
       coverObj.selected="";
       coverObj.position=-1;
       coverObj.imageCoverUrl=imageHelper.imageUrlDispatcher(recordObj.Images[i],imageHelper.DISKCOVER);
-      console.log(coverObj);
       //唱片图片
       recordObj.Images[i]=coverObj;
     }

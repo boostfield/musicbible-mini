@@ -71,7 +71,28 @@ function getAssociateWords(header,data,sucess,fail){
 
 //获取搜索结果列表
 function getSearchResultRecordList(header,data,sucess,fail){
-
+    var url=app.globalData.Host+"/HiFiSearch/search";
+    wx.request({
+        url:url,
+        header:{
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+        },
+        method:'GET',
+        data:{
+            keyword:data.keyword,
+            page:data.page,
+            pageSize:data.pageSize,
+            searchtype:"RecordType",
+            charactertype:"-1"
+        },
+        success:function(res){
+            sucess(res);
+        },
+        fail:function(res){
+            fail(res);
+        }
+    });
 }
 
 //获取唱片详情页
