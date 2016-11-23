@@ -19,22 +19,22 @@
           <text class="title">{{record.TitleCN}}</text>
           <text class="subtitle">{{record.TitleEN}}</text>
             <view class="section intro">
-              <text class="attribute">唱片介质：</text> <text class="value">{{record.MediumType?record.MediumType:null}}</text>
+              <text class="attribute">唱片介质：</text> <text class="value">{{record.MediumType?record.MediumType:"无"}}</text>
             </view>
             <view class="section serialnumber">
-              <text class="attribute">唱片编号：</text> <text class="value">{{record.SerilNumber}}</text>
+              <text class="attribute">唱片编号：</text> <text class="value">{{record.SerilNumber?record.SerilNumber:"无"}}</text>
             </view>
             <view class="section year">
-              <text class="attribute">唱片年份：</text> <text class="value">{{record.PubYear}}</text>
+              <text class="attribute">唱片年份：</text> <text class="value">{{record.PubYear?record.PubYear:"无"}}</text>
             </view>
             <view class="section lable">
-              <text class="attribute">唱片厂牌：</text> <text class="value">{{record.RecordPublisher.NameEN}}</text>
+              <text class="attribute">唱片厂牌：</text> <text class="value">{{record.RecordPublisher.NameEN?record.RecordPublisher.NameEN:"无"}}</text>
             </view>
             <view class="section composor">
-              <text class="attribute">作曲家：</text> <text class="value">{{record.HiFiComposers[0]}}</text>
+              <text class="attribute">作曲家：</text> <text class="value">{{record.HiFiComposers[0]?record.HiFiComposers[0]:"无"}}</text>
             </view>
             <view class="section artist">
-              <text class="attribute" bindtap="onTest">艺术家：</text> <text class="value">{{record.HiFiArtists[0]?record.HiFiArtists[0]:null}}</text>
+              <text class="attribute" bindtap="onTest">艺术家：</text> <text class="value">{{record.HiFiArtists[0]?record.HiFiArtists[0]:"无"}}</text>
             </view>
         </view>
 
