@@ -82,6 +82,7 @@ text.attribute{
 text.value{
     font-size: 28rpx;
     width: 530rpx;
+    height: 50rpx;
     color: #FFFFFF;
     letter-spacing: 0;
     margin-left: 20rpx;

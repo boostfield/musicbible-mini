@@ -35,7 +35,8 @@ App({
   },
   globalData:{
     pixelRatio:2,
-    Host:'http://api.musicbible.com/api/v1',
+    Host:'https://preview.musicbible.com/api/v1',
+    HostV1_1:'https://preview.musicbible.com/api/v1.1',
     userInfo:null
   },
   getDeviceInfo:function(){

@@ -1,4 +1,7 @@
 var app = getApp()
+var api = require('../../backend/api.js');
+var imageHelper = require('../../utils/imageHelper.js');
+var utils = require('../../utils/util.js');
 Page({
     data:{
       record:{
@@ -74,7 +77,7 @@ Page({
     // console.log("realDistance  "+realDistance);
     // console.log("scrollWidth  "+scrollWidth);
     // console.log("scrollLeft  "+e.detail.scrollLeft);
-    var currentList= this.data.record.coverList;
+    var currentList= this.data.record.Images;
     if(!this.data.checkItem){
        for(var i=0;i<currentList.length;i++){
         currentList[i].position=i*realDistance;
@@ -93,20 +96,20 @@ Page({
         console.log("index "+index);
         this.clearAllindex(currentList);
         currentList[index].selected="selected";
-        this.data.record.coverList = currentList
+        this.data.record.Images = currentList
         
          this.setData({
            //scrollLeft:currentList[index].position,
             record:this.data.record
         })
         return;
-      }else if(scrollLeft>=this.data.record.coverList[currentList.length-1].position){
+      }else if(scrollLeft>=this.data.record.Images[currentList.length-1].position){
         console.log("postion "+postion+" scrollLeft  "+scrollLeft);
         var index =currentList.length-1;
         console.log("index "+index);
         this.clearAllindex(currentList);
         currentList[index].selected="selected";
-        this.data.record.coverList = currentList
+        this.data.record.Images = currentList
          this.setData({
             //scrollLeft:currentList[index].position,
             record:this.data.record
@@ -118,15 +121,12 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    this.record.id = options.id;
+    this.data.record.id = options.id;
     this.setData({
-      record: this.record
+      record: this.data.record
     })
-    //初始化小数点
-    if(this.data.record.coverList.length!=0){
-      
-        this.data.record.coverList[0].selected="selected";
-    }
+
+    this.reqRecordDetailData(this.renderRecordDetailData);
   },
   onReady:function(){
     // 页面渲染完成
@@ -163,6 +163,43 @@ Page({
   },
   manageScrollResult:function(index){
     var currentList= this.data.tracklist;
+  },
+  reqRecordDetailData:function(callback){
+    //请求唱片详情数据
+      api.getRecordDetail(null,{
+        id:this.data.record.id
+      },function(res){
+        console.log(res);
+        callback && callback.call(null,res.data)
+      },function(res){
 
+      })
+  },
+  renderRecordDetailData:function(data){
+    //渲染唱片详情数据
+    console.log(data.result);
+    var recordObj=data.result;
+    //唱片图片
+    recordObj.AppCoverUrl=imageHelper.imageUrlDispatcher(recordObj.AppCoverUrl,imageHelper.DISKCOVER);
+    //唱片简介的去空格
+    recordObj.InfoSections[1].Text=utils.trim(recordObj.InfoSections[1].Text);
+    //唱片封面图片列表【需要构造一下】
+    for (var i=0;i<recordObj.Images.length;i++)
+    {
+      var coverObj =new Object();
+      coverObj.selected="";
+      coverObj.position=-1;
+      coverObj.imageCoverUrl=imageHelper.imageUrlDispatcher(recordObj.Images[i],imageHelper.DISKCOVER);
+      console.log(coverObj);
+      //唱片图片
+      recordObj.Images[i]=coverObj;
+    }
+    this.setData({
+      record:recordObj
+    })
+    //初始化小数点
+    if(this.data.record.Images.length!=0){
+        this.data.record.Images[0].selected="selected";
+    }
   }
 })

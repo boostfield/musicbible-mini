@@ -2,39 +2,39 @@
 
       <!--scroll-view-->
         <scroll-view id="scroll" class="scroll-view_H" scroll-x="true" style="width: 100%"  bindscroll="scroll"  scroll-left="{{scrollLeft}}"  >
-          <block wx:for="{{record.coverList}}">
-            <image id="{{item.id}}" class="scroll-view-item_H" src="{{item.imageCoverUrl}}" bindtap="actionImagePreview" data-cover="{{item.imageCoverUrl}}"></image>
+          <block wx:for="{{record.Images}}">
+            <image id="{{item.id}}" class="scroll-view-item_H" src="{{item.imageCoverUrl}}" bindtap="actionImagePreview" data-cover="{{Images}}"></image>
           </block>
         </scroll-view>
 
         <!--dots-->
         <view class="dots">
-          <block wx:for="{{record.coverList}}">
+          <block wx:for="{{record.Images}}">
             <view class="dot {{item.selected}}" ></view>
           </block>
         </view>
 
         <!-- record detail -->
         <view class="text-content">
-          <text class="title">{{record.title}}</text>
-          <text class="subtitle">{{record.subtitle}}</text>
+          <text class="title">{{record.TitleCN}}</text>
+          <text class="subtitle">{{record.TitleEN}}</text>
             <view class="section intro">
-              <text class="attribute">唱片简介：</text> <text class="value">{{record.intro}}</text>
+              <text class="attribute">唱片简介：</text> <text class="value">{{record.InfoSections[1].Text?record.InfoSections[1].Text:null}}</text>
             </view>
             <view class="section serialnumber">
-              <text class="attribute">唱片编号：</text> <text class="value">{{record.serialnumber}}</text>
+              <text class="attribute">唱片编号：</text> <text class="value">{{record.SerilNumber}}</text>
             </view>
             <view class="section year">
-              <text class="attribute">唱片年份：</text> <text class="value">{{record.year}}</text>
+              <text class="attribute">唱片年份：</text> <text class="value">{{record.PubYear}}</text>
             </view>
             <view class="section lable">
-              <text class="attribute">唱片厂牌：</text> <text class="value">{{record.lable}}</text>
+              <text class="attribute">唱片厂牌：</text> <text class="value">{{record.RecordPublisher.NameEN}}</text>
             </view>
             <view class="section composor">
-              <text class="attribute">作曲家：</text> <text class="value">{{record.composor}}</text>
+              <text class="attribute">作曲家：</text> <text class="value">{{record.HiFiComposers[0]}}</text>
             </view>
             <view class="section artist">
-              <text class="attribute">艺术家：</text> <text class="value">{{record.artist}}</text>
+              <text class="attribute">艺术家：</text> <text class="value">{{record.HiFiArtists[0]}}</text>
             </view>
         </view>
 
@@ -44,9 +44,9 @@
    <!--image preview-->
    <view class="preview" hidden="{{isHidePreivew}}">
          <swiper class="swiper-body" indicator-dots="{{true}}"autoplay="{{false}}" interval="{{0}}" duration="{{0}}" bindtap="closePreview" >
-            <block wx:for="{{tracklist}}">
+            <block wx:for="{{record.Images}}">
               <swiper-item class="slide-item">
-                <image class="preview-image" src="{{item.imageCoverUrl}}"  mode="aspectFit"></image>
+                <image class="preview-image" src="{{item}}"  mode="aspectFit"></image>
               </swiper-item>
             </block>
         </swiper>

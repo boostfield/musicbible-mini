@@ -53,6 +53,7 @@
   flex-wrap: wrap;
   display: flex;
   padding-right: 30rpx;
+  padding-bottom: 61rpx;
 }
 
 .list{

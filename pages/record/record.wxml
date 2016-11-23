@@ -23,7 +23,7 @@
     <!--最新-->
   <view class="content content_02" hidden="{{tabSelect[1]}}">
     <view class="list">
-            <block  wx:for="{{record_recommed.list}}">
+            <block  wx:for="{{record_latest.list}}">
             <template is="list-items" data="{{...item}}"/>
             </block>
         </view>
@@ -33,20 +33,20 @@
 
     <!--推荐的模板-->
     <template name="grid-items">
-        <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{imageCoverUrl}}" mode="scaleToFill"></image>
-                      <text class="title item-title">{{title}}</text>
-                      <text  class="title item-subtitle">{{subTitle}}</text>
+        <navigator url="../record-detail/record-detail?id={{Id}}" hover-class="navigator-hover">
+                      <image class="item-image" src="{{AppCoverUrl}}" mode="scaleToFill"></image>
+                      <text class="title item-title">{{TitleCN?TitleCN:null}}</text>
+                      <text  class="title item-subtitle">{{TitleEN?TitleEN:null}}</text>
         </navigator>
       </template>
 
     <!--最新的模板-->
     <template name="list-items">
-            <navigator url="../record-detail/record-detail?id={id}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{imageCoverUrl}}" mode="scaleToFill"></image>
+            <navigator url="../record-detail/record-detail?id={Id}" hover-class="navigator-hover">
+                      <image class="item-image" src="{{AppCoverUrl}}" mode="scaleToFill"></image>
                       <view class="item-content">
-                      <text class="title item-title">{{title}}</text>
-                      <text  class="title item-subtitle">{{subTitle}}</text>
+                      <text class="title item-title">{{TitleCN?TitleCN:null}}</text>
+                      <text  class="title item-subtitle">{{TitleEN?TitleEN:null}}</text>
                       </view>
            </navigator>
       </template>

@@ -12,12 +12,51 @@ module.exports = {
 
 //获取推荐LP列表
 function getRecommendReocrdList(header,data,sucess,fail){
-
+    var url=app.globalData.HostV1_1+"/records/homerecommends";
+    wx.request({
+        url:url,
+        header:{
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+        },
+        method:'GET',
+        data:{
+            mediaType:"LP",
+            page:data.page,
+            pageSize:data.pageSize
+        },
+        success:function(res){
+            sucess(res);
+        },
+        fail:function(res){
+            fail(res);
+        }
+    });
 }
 
 //获取最新LP列表
 function getLatestRecordList(header,data,sucess,fail){
-
+    var url=app.globalData.Host+"/HiFiSearch/AdvancedSearch";
+    wx.request({
+        url:url,
+        header:{
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+        },
+        method:'POST',
+        data:{
+            MediaType:"LP",
+            MusicType:"classical",
+            page:data.page,
+            pageSize:data.pageSize
+        },
+        success:function(res){
+            sucess(res);
+        },
+        fail:function(res){
+            fail(res);
+        }
+    });
 }
 
 //获取热门关键词
@@ -37,8 +76,27 @@ function getSearchResultRecordList(header,data,sucess,fail){
 
 //获取唱片详情页
 function getRecordDetail(header,data,sucess,fail){
-
+    var url=app.globalData.Host+"/records/item/"+data.id;
+    wx.request({
+        url:url,
+        header:{
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+        },
+        method:'GET',
+        data:{},
+        success:function(res){
+            sucess(res);
+        },
+        fail:function(res){
+            fail(res);
+        }
+    });
 }
+
+
+
+
 
 
 
@@ -66,3 +124,4 @@ function getTimeLineList(header,data,sucess,fail){
         }
     });
 }
+
