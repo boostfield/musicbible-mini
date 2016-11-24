@@ -35,6 +35,7 @@ App({
   },
   globalData:{
     pixelRatio:2,
+    windowWidth:375,
     Host:'https://preview.musicbible.com/api/v1',
     HostV1_1:'https://preview.musicbible.com/api/v1.1',
     userInfo:null
@@ -49,7 +50,8 @@ App({
         console.log(res.windowHeight)
         console.log(res.language)
         console.log(res.version)
-        this.pixelRatio=res.pixelRatio;
+        this.globalData.pixelRatio=res.pixelRatio;
+        this.globalData.windowWidth=res.windowWidth;
       } catch (e) {
         // Do something when catch error
       } 

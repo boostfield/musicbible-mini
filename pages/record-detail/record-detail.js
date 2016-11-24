@@ -2,6 +2,8 @@ var app = getApp()
 var api = require('../../backend/api.js');
 var imageHelper = require('../../utils/imageHelper.js');
 var utils = require('../../utils/util.js');
+
+var staticIndex=0;
 Page({
     data:{
       currentIndex:0,
@@ -13,12 +15,13 @@ Page({
     },
   scroll: function(e) {
     var pixelRatio=app.globalData.pixelRatio;
-    var realDistance = 470/pixelRatio;
+    var windowWidth=app.globalData.windowWidth;
+    var realDistance = (windowWidth/750)*470;
     var scrollLeft=e.detail.scrollLeft
     var scrollWidth= e.detail.scrollWidth;
-    // console.log("realDistance  "+realDistance);
-    // console.log("scrollWidth  "+scrollWidth);
-    // console.log("scrollLeft  "+e.detail.scrollLeft);
+    console.log("realDistance  "+realDistance);
+    console.log("scrollWidth  "+scrollWidth);
+    console.log("scrollLeft  "+e.detail.scrollLeft);
     var currentList= this.data.record.Images;
     if(!this.data.checkItem){
        for(var i=0;i<currentList.length;i++){
@@ -41,12 +44,12 @@ Page({
         this.data.record.Images = currentList
         
          this.setData({
-           //scrollLeft:currentList[index].position,
+            //scrollLeft:(this.data.record.Images[index].position)+1,
             record:this.data.record,
             currentIndex:index
         })
         return;
-      }else if(scrollLeft>=this.data.record.Images[currentList.length-1].position){
+      }else if(scrollLeft==scrollWidth-windowWidth){
         //console.log("postion "+postion+" scrollLeft  "+scrollLeft);
         var index =currentList.length-1;
         //console.log("index "+index);
@@ -54,7 +57,7 @@ Page({
         currentList[index].selected="selected";
         this.data.record.Images = currentList
          this.setData({
-            //scrollLeft:currentList[index].position,
+            //scrollLeft:(this.data.record.Images[index].position)+1,
             record:this.data.record,
             currentIndex:index
         })
@@ -100,7 +103,8 @@ Page({
   closePreview:function(){
     //关闭图片预览
     this.setData({
-      isHidePreivew:true
+      isHidePreivew:true,
+      scrollLeft:(this.data.record.Images[staticIndex].position)+1
     })
   },
   clearAllindex:function(currentList){
@@ -151,8 +155,9 @@ Page({
     var index = e.detail.current;
     console.log("~~~~");
     console.log(index);
-    this.setData({
-      scrollLeft:this.data.record.Images[index].position
-    })
+    staticIndex=index;
+    // this.setData({
+    //   scrollLeft:this.data.record.Images[index].position
+    // })
   }
 })
