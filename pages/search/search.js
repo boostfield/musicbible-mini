@@ -4,6 +4,7 @@ var imageHelper = require('../../utils/imageHelper.js');
 var utils = require('../../utils/util.js');
 Page({
     data: {
+        isFirstIn:false,
         isHideFooterLoading:true,
         keyWords:["巴赫","贝多芬","月光","第九号交响曲","安雅·陶尔","柴可夫斯基","钢琴奏鸣曲","迈克尔·杰克逊","小提琴协奏曲","合唱交响曲","海顿","鲁道夫"],
         associateWords:["巴赫1111111111111111111111111111111111111111111","巴赫222222222222","巴赫333333333","巴赫4444444","巴赫55555555"],
@@ -64,6 +65,9 @@ Page({
         },
         ]
     },
+    onLoad:function(){
+        this.reqKeyWordsData(this.renderKeyWordsData);
+    },
     actionSearch:function(){
         //搜索bar
         this.setData({
@@ -87,14 +91,16 @@ Page({
         })
     },
     actionKeyInput:function(e){
+        var content = e.detail.value;
         //输入搜索内容
         console.log(e);
-        console.log("内容 "+e.detail.value);
+        console.log("内容 "+content);
         this.setData({
             isShowAssociateWords:true,
             isShowRecordResult:false,
-            searchContent:e.detail.value
+            searchContent:content
         })
+        this.reqAssociateWordsData(this.renderAssociateWordsData,content);
     },
     actionHotWordSearch:function(e){
         //点击热门词
@@ -120,6 +126,12 @@ Page({
         setTimeout(this.onPullDownRefreshSuccess,2000);
     }, 
     onReachBottom: function () {
+        if(!this.data.isFirstIn){
+        this.setData({
+             isFirstIn:true
+        });   
+            return;
+        }
         console.log("shang la shua xin");
         this.setData({
             isHideFooterLoading:false
@@ -136,9 +148,47 @@ Page({
             isHideFooterLoading:true
         });
     }, 
+  reqKeyWordsData:function(callback){
+    //请求关键字数据
+    api.getHotKeyWords(null,{},function(res){
+        callback && callback.call(null,res.data)
+    },function(res){
+       console.log('获取热门关键词错误');
+    })
+  },  
+  renderKeyWordsData:function(res){
+    var newKeyWords=res.result;
+    if (newKeyWords.length>0) {
+        this.setData({
+            keyWords:newKeyWords
+        })
+    }
+
+  },
+  reqAssociateWordsData:function(callback,newkeyword){
+    //请求关联词
+    if (!keyword) {
+        return;
+    }
+    api.getAssociateWords(null,{
+      keyword:newkeyword
+    },function(res){
+        callback && callback.call(null,res.data,false)
+    },function(res){
+       console.log('获取关联词错误');
+    })
+  }, 
+  renderAssociateWordsData:function(res){
+    var newAssociateWords= res.result;
+    if (newAssociateWords.length>0) {
+        this.setData({
+            associateWords:newAssociateWords
+        })
+    }
+  },
     reqResultData:function(callback,isAdd,currentPage){
-    //请求搜索结果数据
-    wx.showNavigationBarLoading();
+        //请求搜索结果数据
+        wx.showNavigationBarLoading();
       if(isAdd){
         var index = currentPage.data.record_search.index+1;
       }else{

@@ -61,12 +61,42 @@ function getLatestRecordList(header,data,sucess,fail){
 
 //获取热门关键词
 function getHotKeyWords(header,data,sucess,fail){
-
+    var url = app.globalData.Host+'/HiFiSearch/hot';
+    wx.request({
+        url:url,
+        header:{
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+        },
+        method:'GET',
+        data:{},
+        success:function(res){
+            sucess(res);
+        },
+        fail:function(res){
+            fail(res);
+        }
+    });
 }
 
 //获取搜索关联词列表 5个
 function getAssociateWords(header,data,sucess,fail){
-
+    var url = app.globalData.Host+'/HiFiSearch/SearchSuggestion?keyword='+data.keyword;
+    wx.request({
+        url:url,
+        header:{
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+        },
+        method:'GET',
+        data:{},
+        success:function(res){
+            sucess(res);
+        },
+        fail:function(res){
+            fail(res);
+        }
+    });
 }
 
 //获取搜索结果列表
