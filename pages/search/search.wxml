@@ -20,8 +20,8 @@
          <text class="btn-cancle"  bindtap="actionCancle" >取消</text>
     </view>
  
-    <!--hot key words type01-->
-    <view class="hot-word-content fitSystemSartchBar" wx:if="{{!isShowRealSearchBar}}">
+    <!--hot key words -->
+    <view class="hot-word-content fitSystemSearchBar" wx:if="{{!isShowRealSearchBar}}">
         <text class="title">热门关键词</text>
         <block  wx:for="{{keyWords}}">
           <text class="name" bindtap="actionHotWordSearch" data-hotkey="{{item}}">{{item}}</text>
@@ -29,7 +29,7 @@
     </view>
 
     <!--associate words-->
-    <view class="associate-word-content fitSystemSartchBar" wx:if="{{isShowAssociateWords&&searchContent.length>0}}">
+    <view class="associate-word-content fitSystemSearchBar" wx:if="{{isShowAssociateWords&&searchContent.length>0}}">
         <block  wx:for="{{associateWords}}">
             <view class="wrapper">
             <text class="name" bindtap="actionAssociateWordSearch" data-hotkey="{{item}}">{{item}}</text>
@@ -37,7 +37,7 @@
         </block>
     </view>
     <!--search result-->
-      <view class="content  fitSystemSartchBar" wx:if="{{isShowRecordResult}}">
+      <view class="content  fitSystemSearchBar" wx:if="{{isShowRecordResult}}">
                 <view class="list">
                     <block  wx:for="{{record_search.list}}">
                         <template is="list-items" data="{{...item}}"/>

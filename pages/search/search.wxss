@@ -1,6 +1,5 @@
 /**search.wxss**/
 .container{
-  background: #3C372F;
   padding: 0;
 }
 
@@ -82,7 +81,7 @@
     letter-spacing: 0.27px;
 }
 
-.fitSystemSartchBar{
+.fitSystemSearchBar{
     padding-top: 88rpx;
 }
 

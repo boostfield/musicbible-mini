@@ -7,7 +7,7 @@ Page({
         isFirstIn:false,
         isHideFooterLoading:true,
         keyWords:["巴赫","贝多芬","月光","第九号交响曲","安雅·陶尔","柴可夫斯基","钢琴奏鸣曲","迈克尔·杰克逊","小提琴协奏曲","合唱交响曲","海顿","鲁道夫"],
-        associateWords:["巴赫1111111111111111111111111111111111111111111","巴赫222222222222","巴赫333333333","巴赫4444444","巴赫55555555"],
+        associateWords:[],
         isShowRealSearchBar:false,
         isShowAssociateWords:false,
         isShowRecordResult:false,
@@ -80,8 +80,10 @@ Page({
            isShowRealSearchBar:false,
            isShowAssociateWords:false,
            isShowRecordResult:false,
-           searchContent:""
+           searchContent:"",
+            associateWords:new Array()
         })
+
     },
     actionDeleteInputValue:function(){
         //删除input内容
@@ -100,7 +102,7 @@ Page({
             isShowRecordResult:false,
             searchContent:content
         })
-        this.reqAssociateWordsData(this.renderAssociateWordsData,content);
+        this.reqAssociateWordsData(this.renderAssociateWordsData);
     },
     actionHotWordSearch:function(e){
         //点击热门词
@@ -110,6 +112,7 @@ Page({
             isShowAssociateWords:true,
             searchContent:e.currentTarget.dataset.hotkey
         })
+        this.reqAssociateWordsData(this.renderAssociateWordsData);
     },
     actionAssociateWordSearch:function(e){
         //点击关联词
@@ -148,8 +151,9 @@ Page({
             isHideFooterLoading:true
         });
     }, 
-  reqKeyWordsData:function(callback){
     //请求关键字数据
+  reqKeyWordsData:function(callback){
+    
     api.getHotKeyWords(null,{},function(res){
         callback && callback.call(null,res.data)
     },function(res){
@@ -165,20 +169,24 @@ Page({
     }
 
   },
-  reqAssociateWordsData:function(callback,newkeyword){
-    //请求关联词
-    if (!keyword) {
+  //请求关联词
+  reqAssociateWordsData:function(callback){
+    var words= this.data.searchContent;
+    if (!words) {
         return;
     }
+
     api.getAssociateWords(null,{
-      keyword:newkeyword
+      keyword:words
     },function(res){
         callback && callback.call(null,res.data,false)
     },function(res){
        console.log('获取关联词错误');
     })
   }, 
+  //渲染关联词
   renderAssociateWordsData:function(res){
+      console.log("test02"+res.result.length);
     var newAssociateWords= res.result;
     if (newAssociateWords.length>0) {
         this.setData({
