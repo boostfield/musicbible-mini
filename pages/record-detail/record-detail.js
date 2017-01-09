@@ -63,7 +63,6 @@ Page({
         //console.log("index "+index);
         this.clearAllindex(currentList);
         currentList[index].selected="selected";
-        this.data.record.Images = currentList
          this.setData({
             //scrollLeft:(this.data.record.Images[index].position)+1,
             record:this.data.record,
@@ -168,6 +167,7 @@ Page({
     //   scrollLeft:this.data.record.Images[index].position
     // })
   },
+  //分享界面
   onShareAppMessage:function(){
      return {
       title: this.data.record.TitleCN,
