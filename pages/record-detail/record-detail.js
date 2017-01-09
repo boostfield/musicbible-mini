@@ -33,16 +33,24 @@ Page({
     }
     //开始处理 找出谁是current
     for(var i=0;i<currentList.length;i++){
-
       var postion=currentList[i].position;
-      if(scrollLeft<postion){
+      if(scrollLeft==0){
+        index=0;
+        this.clearAllindex(currentList);
+        if(currentList.length!=0){
+            currentList[index].selected="selected";
+        }
+        this.setData({
+            record:this.data.record,
+            currentIndex:index
+        })
+        return;
+      }else if(scrollLeft<postion){
         //console.log("postion "+postion+" scrollLeft  "+scrollLeft);
         var index = i-1;
         //console.log("index "+index);
         this.clearAllindex(currentList);
         currentList[index].selected="selected";
-        this.data.record.Images = currentList
-        
          this.setData({
             //scrollLeft:(this.data.record.Images[index].position)+1,
             record:this.data.record,
@@ -76,7 +84,6 @@ Page({
   },
   onReady:function(){
     // 页面渲染完成
-
     //让所有cover能刷新position
     this.setData({
       scrollLeft:this.data.scrollLeft+1
@@ -130,26 +137,27 @@ Page({
     //渲染唱片详情数据
     var recordObj=data.result;
     //唱片图片
-    recordObj.AppCoverUrl=imageHelper.imageUrlDispatcher(recordObj.AppCoverUrl,imageHelper.DISKCOVER);
+    recordObj.AppCoverUrl=imageHelper.imageUrlDispatcher(recordObj.AppCoverUrl,imageHelper.ORIGIN);
     //唱片简介的去空格
     recordObj.InfoSections[1].Text=utils.trim(recordObj.InfoSections[1].Text);
     //唱片封面图片列表【需要构造一下】
     for (var i=0;i<recordObj.Images.length;i++)
     {
       var coverObj =new Object();
-      coverObj.selected="";
+      if(i===0){
+        //初始化小数点
+        coverObj.selected="selected";
+      }else{
+        coverObj.selected="";
+      }
       coverObj.position=-1;
-      coverObj.imageCoverUrl=imageHelper.imageUrlDispatcher(recordObj.Images[i],imageHelper.DISKCOVER);
+      coverObj.imageCoverUrl=imageHelper.imageUrlDispatcher(recordObj.Images[i],imageHelper.ORIGIN);
       //唱片图片
       recordObj.Images[i]=coverObj;
     }
     this.setData({
       record:recordObj
     })
-    //初始化小数点
-    if(this.data.record.Images.length!=0){
-        this.data.record.Images[0].selected="selected";
-    }
   },
   onCurrentPageSelected:function(e){
     var index = e.detail.current;

@@ -18,22 +18,22 @@
         <view class="text-content">
           <text class="title">{{record.TitleCN}}</text>
           <text class="subtitle">{{record.TitleEN}}</text>
-            <view class="section intro">
+            <view class="section intro" hidden="{{record.MediumType?false:true}}">
               <text class="attribute">唱片介质：</text> <text class="value">{{record.MediumType?record.MediumType:"无"}}</text>
             </view>
-            <view class="section serialnumber">
+            <view class="section serialnumber" hidden="{{record.SerilNumber?false:true}}">
               <text class="attribute">唱片编号：</text> <text class="value">{{record.SerilNumber?record.SerilNumber:"无"}}</text>
             </view>
-            <view class="section year">
+            <view class="section year" hidden="{{record.PubYear?false:true}}">
               <text class="attribute">唱片年份：</text> <text class="value">{{record.PubYear?record.PubYear:"无"}}</text>
             </view>
-            <view class="section lable">
+            <view class="section lable" hidden="{{record.RecordPublisher.NameEN?false:true}}">
               <text class="attribute">唱片厂牌：</text> <text class="value">{{record.RecordPublisher.NameEN?record.RecordPublisher.NameEN:"无"}}</text>
             </view>
-            <view class="section composor">
+            <view class="section composor" hidden="{{record.HiFiComposers[0]?false:true}}">
               <text class="attribute">作曲家：</text> <text class="value">{{record.HiFiComposers[0]?record.HiFiComposers[0]:"无"}}</text>
             </view>
-            <view class="section artist">
+            <view class="section artist" hidden="{{record.HiFiArtists[0]?false:true}}">
               <text class="attribute" bindtap="onTest">艺术家：</text> <text class="value">{{record.HiFiArtists[0]?record.HiFiArtists[0]:"无"}}</text>
             </view>
         </view>
@@ -43,10 +43,10 @@
 
    <!--image preview-->
    <view class="preview" hidden="{{isHidePreivew}}">
-         <swiper class="swiper-body" indicator-dots="{{true}}"autoplay="{{false}}" interval="{{0}}" duration="{{0}}" bindtap="closePreview" current="{{currentIndex}}" bindchange="onCurrentPageSelected" >
+         <swiper class="swiper-body" indicator-dots="{{true}}"autoplay="{{false}}" interval="{{0}}" duration="{{0}}"  current="{{currentIndex}}" bindchange="onCurrentPageSelected" >
             <block wx:for="{{record.Images}}">
               <swiper-item class="slide-item">
-                <image class="preview-image" src="{{item.imageCoverUrl}}"  mode="aspectFit"></image>
+                <image class="preview-image" src="{{item.imageCoverUrl}}"  mode="aspectFit"  bindtap="closePreview"></image>
               </swiper-item>
             </block>
         </swiper>

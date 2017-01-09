@@ -8,9 +8,15 @@ var LP_RECOMMEND=1;
 var LP_LATEST=2;
 var lp_type=[LP_RECOMMEND,LP_LATEST];
 
+var FOOTER_LOADING="加载中...";
+var FOOTER_NO_MORE="没有更多了";
+
+var FOOT_Strings=["loading","nomore"];
 Page({
   data: {
     currentType:lp_type[0],
+    tabSelect:[false,true],
+    footerString:FOOTER_LOADING,
     isHideFooterLoading:true,
     record_recommed:{
       index:1,
@@ -22,7 +28,6 @@ Page({
       pageSize:10,
       list:[]
       },
-    tabSelect:[false,true],
   },
   onLoad: function () {
     console.log('onLoad')
@@ -46,11 +51,17 @@ Page({
           if(isAdd){
              if(res.data.result.DataList.length>0){
               currentPage.data.record_recommed.index =index;
+              currentPage.setData({
+                  footerString:FOOTER_LOADING,
+                  isHideFooterLoading:true
+              });
+            }else{
+              currentPage.setData({
+                 footerString:FOOTER_NO_MORE,
+                 isHideFooterLoading:false
+              });
             }
             console.log('上拉刷新完成');
-            currentPage.setData({
-                 isHideFooterLoading:true
-            });
           }else{
             console.log('下拉刷新完成')
             wx.stopPullDownRefresh()
@@ -86,11 +97,17 @@ Page({
           if(isAdd){
             if(res.data.result.DataList.length>0){
               currentPage.data.record_latest.index =index;
+              currentPage.setData({
+                  footerString:FOOTER_LOADING,
+                  isHideFooterLoading:true
+              });
+            }else{
+              currentPage.setData({
+                 footerString:FOOTER_NO_MORE,
+                 isHideFooterLoading:false
+              });
             }
             console.log('上拉刷新完成');
-            currentPage.setData({
-                 isHideFooterLoading:true
-            });
           }else{
             console.log('下拉刷新完成')
             wx.stopPullDownRefresh()

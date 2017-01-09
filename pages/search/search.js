@@ -2,8 +2,13 @@ var app = getApp()
 var api = require('../../backend/api.js');
 var imageHelper = require('../../utils/imageHelper.js');
 var utils = require('../../utils/util.js');
+
+var FOOTER_LOADING="加载中...";
+var FOOTER_NO_MORE="没有更多了";
+
 Page({
     data: {
+        footerString:FOOTER_LOADING,
         isFirstIn:false,
         isHideFooterLoading:true,
         keyWords:["巴赫","贝多芬","月光","第九号交响曲","安雅·陶尔","柴可夫斯基","钢琴奏鸣曲","迈克尔·杰克逊","小提琴协奏曲","合唱交响曲","海顿","鲁道夫"],
@@ -17,53 +22,6 @@ Page({
             pageSize:10,
             list:[]
             },
-        searchResultArray:[
-        {
-            imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-            title:"巴赫: 6首大提琴无伴圣诞节放水淀粉当时发生的首都发生的…",
-            subTitle:"BACH:Six Suites For Sol fdsf dsf fsdf dsfsd sdfsd…"
-        },
-        {
-            imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-            title:"item02",
-            subTitle:"subTitle02"
-        },
-        {
-            imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-            title:"item03",
-            subTitle:"subTitle03"
-        },
-        {
-            imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-            title:"item04",
-            subTitle:"subTitle04"
-        },
-        {
-            imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-            title:"item05",
-            subTitle:"subTitle05"
-        },
-        {
-            imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-            title:"item06",
-            subTitle:"subTitle06"
-        },
-        {
-            imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-            title:"item06",
-            subTitle:"subTitle06"
-        },
-        {
-            imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-            title:"item06",
-            subTitle:"subTitle06"
-        },
-        {
-            imageCoverUrl:"http://img.blog.csdn.net/20141012230011472?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast",
-            title:"item06",
-            subTitle:"subTitle06"
-        },
-        ]
     },
     onLoad:function(){
         this.reqKeyWordsData(this.renderKeyWordsData);
@@ -81,7 +39,8 @@ Page({
            isShowAssociateWords:false,
            isShowRecordResult:false,
            searchContent:"",
-            associateWords:new Array()
+            associateWords:new Array(),
+            record_search:new Object()
         })
 
     },
@@ -89,6 +48,7 @@ Page({
         //删除input内容
         this.setData({
             isShowRecordResult:false,
+            record_search:new Object(),
             searchContent:""
         })
     },
@@ -211,11 +171,17 @@ Page({
           if(isAdd){
              if(res.data.result.DataList.length>0){
               currentPage.data.record_search.index =index;
+              currentPage.setData({
+                  footerString:FOOTER_LOADING,
+                  isHideFooterLoading:true
+              });
+            }else{
+              currentPage.setData({
+                 footerString:FOOTER_NO_MORE,
+                 isHideFooterLoading:false
+              });
             }
             console.log('上拉刷新完成');
-            currentPage.setData({
-                 isHideFooterLoading:true
-            });
           }else{
             console.log('下拉刷新完成')
             wx.stopPullDownRefresh()

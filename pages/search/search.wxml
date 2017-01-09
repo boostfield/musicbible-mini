@@ -31,8 +31,8 @@
     <!--associate words-->
     <view class="associate-word-content fitSystemSearchBar" wx:if="{{isShowAssociateWords&&searchContent.length>0}}">
         <block  wx:for="{{associateWords}}">
-            <view class="wrapper">
-            <text class="name" bindtap="actionAssociateWordSearch" data-hotkey="{{item}}">{{item}}</text>
+            <view class="wrapper" bindtap="actionAssociateWordSearch" data-hotkey="{{item}}">
+                <text class="name"  >{{item}}</text>
             </view>
         </block>
     </view>
@@ -43,7 +43,7 @@
                         <template is="list-items" data="{{...item}}"/>
                     </block>
                 </view>
-                <view class="loading" hidden="{{isHideFooterLoading}}"><text>加载中...</text></view>
+                <view class="loading" hidden="{{isHideFooterLoading}}"><text>{{footerString}}</text></view>
         </view>
 
     <!--搜索列表的模板-->              

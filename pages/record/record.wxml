@@ -1,52 +1,60 @@
 <!--index.wxml-->
-<view class="container" >
-<view class="tablayout">
-  <view class="tab tab_recommend" bindtap="recommend_onclick">
-      <text class="title">推荐</text>
-      <view class="divider" hidden="{{tabSelect[0]}}"></view>
+<view class="container" bindtouchstart="touchstart" bindtouchend="touchend">
+  <!--tabLayout-->
+  <view class="tablayout">
+    <view class="tab tab_recommend" bindtap="recommend_onclick">
+        <text class="title">推荐</text>
+        <view class="divider" hidden="{{tabSelect[0]}}"></view>
+    </view>
+    <view class="tab tab_latest" bindtap="latest_onclick">
+        <text class="title">最新</text>
+        <view class="divider" hidden="{{tabSelect[1]}}"></view>
+    </view>
   </view>
-  <view class="tab tab_latest" bindtap="latest_onclick">
-      <text class="title">最新</text>
-      <view class="divider" hidden="{{tabSelect[1]}}"></view>
+
+
+  <view class="content content_recommend" hidden="{{tabSelect[0]}}">
+      <scroll-view scroll-y="true"  class="scroll-wrapper" >
+        <view class="grid">
+          <block  wx:for="{{record_recommed.list}}">
+            <template is="grid-items" data="{{...item}}"/>
+          </block>
+        </view>
+        <view class="loading" hidden="{{isHideFooterLoading}}"><text>{{footerString}}</text></view>
+      </scroll-view>
   </view>
-</view>
 
   <!--推荐-->
-  <view class="content content_01" hidden="{{tabSelect[0]}}">
-      <view class="grid">
-        <block  wx:for="{{record_recommed.list}}">
-          <template is="grid-items" data="{{...item}}"/>
-        </block>
-      </view>
-      <view class="loading" hidden="{{isHideFooterLoading}}"><text>加载中...</text></view>
-  </view>
-    <!--最新-->
-  <view class="content content_02" hidden="{{tabSelect[1]}}">
+
+
+  <!--最新-->
+  <view class="content content_latest" hidden="{{tabSelect[1]}}">
     <view class="list">
             <block  wx:for="{{record_latest.list}}">
             <template is="list-items" data="{{...item}}"/>
             </block>
-        </view>
-        <view class="loading" hidden="{{isHideFooterLoading}}"><text>加载中...</text></view>
+    </view>
+    <view class="loading" hidden="{{isHideFooterLoading}}"><text>{{footerString}}</text></view>
   </view>
+  
 </view>
+
 
     <!--推荐的模板-->
     <template name="grid-items">
         <navigator url="../record-detail/record-detail?id={{Id}}" hover-class="navigator-hover">
                       <image class="item-image" src="{{AppCoverUrl}}" mode="scaleToFill"></image>
-                      <text class="title item-title">{{TitleCN?TitleCN:null}}</text>
-                      <text  class="title item-subtitle">{{TitleEN?TitleEN:null}}</text>
+                      <text class="title item-title">{{TitleCN?TitleCN:""}}</text>
+                      <text  class="title item-subtitle">{{TitleEN?TitleEN:""}}</text>
         </navigator>
       </template>
-
     <!--最新的模板-->
     <template name="list-items">
             <navigator url="../record-detail/record-detail?id={{Id}}" hover-class="navigator-hover">
                       <image class="item-image" src="{{AppCoverUrl}}" mode="scaleToFill"></image>
                       <view class="item-content">
-                      <text class="title item-title">{{TitleCN?TitleCN:null}}</text>
-                      <text  class="title item-subtitle">{{TitleEN?TitleEN:null}}</text>
+                      <text class="title item-title">{{TitleCN?TitleCN:""}}</text>
+                      <text  class="title item-subtitle">{{TitleEN?TitleEN:""}}</text>
                       </view>
            </navigator>
       </template>

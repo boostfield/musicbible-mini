@@ -59,12 +59,14 @@
 .text-content .title{
     font-size: 40rpx;
     color: #C1B087;
+    white-space:normal;
 }
 .text-content .subtitle{
     opacity: 0.5;
     font-size: 32rpx;
     margin-top: 6rpx;
     color: #C1B087;
+    white-space:normal;
 }
 .intro{
     margin-top: 60rpx;
