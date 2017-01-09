@@ -167,5 +167,12 @@ Page({
     // this.setData({
     //   scrollLeft:this.data.record.Images[index].position
     // })
+  },
+  onShareAppMessage:function(){
+     return {
+      title: this.data.record.TitleCN,
+      desc: this.data.record.InfoSections[1].Text,
+      path: 'pages/record-detail/record-detail?id='+this.data.record.Id
+    }
   }
 })
