@@ -1,6 +1,7 @@
   <view class="container" hidden="{{!isHidePreivew}}">
 
       <!--scroll-view-->
+
         <scroll-view id="scroll" class="scroll-view_H" scroll-x="true" style="width: 100%"  bindscroll="scroll"  scroll-left="{{scrollLeft}}"  >
           <block wx:for="{{record.Images}}">
             <image id="{{item.id}}" class="scroll-view-item_H" src="{{item.imageCoverUrl}}" bindtap="actionImagePreview" data-cover="{{Images}}"></image>
@@ -13,11 +14,19 @@
             <view class="dot {{item.selected}}" ></view>
           </block>
         </view>
+       <!--title-->
+       <view class="text-title">
+          <text class="title">{{record.TitleCN}}</text>
+          <text class="subtitle">{{record.TitleEN}}</text>
+       </view>
+
+       <!--block basic-info-->
+       <view class="section-main section-basic-info">
+          <text class="title">基本信息</text>
+       </view>
 
         <!-- record detail -->
         <view class="text-content">
-          <text class="title">{{record.TitleCN}}</text>
-          <text class="subtitle">{{record.TitleEN}}</text>
             <view class="section intro" hidden="{{record.MediumType?false:true}}">
               <text class="attribute">唱片介质：</text> <text class="value">{{record.MediumType?record.MediumType:"无"}}</text>
             </view>
@@ -37,9 +46,29 @@
               <text class="attribute" bindtap="onTest">艺术家：</text> <text class="value">{{record.HiFiArtists[0]?record.HiFiArtists[0]:"无"}}</text>
             </view>
         </view>
+       <!--block basic-info-->
+       <view class="section-main section-basic-info">
+          <text class="title">音乐试听</text>
+       </view>
 
+        <view class="media-list">
+            <block  wx:for="{{record.Audios}}" >
+              <template is="media-list-item" data="{{...item}}"/>
+            </block>
+        </view>
        
   </view>
+
+
+    <!--音频的列表-->
+    <template name="media-list-item">
+        <div class="media-list-item" data-audiourl="{{AudioUrl}}" data-index="{{index}}"  bindtap="actionPlayMusic">
+          <image class="item-image "  mode="scaleToFill" src="{{isMusicPlaying?'../../image/ic_detail_music_p.png':'../../image/ic_detail_music_n.png'}}"></image>
+          <view class="item-content">
+              <text  class="title {{selected}}">{{Title?Title:""}}</text>
+          </view>
+        </div>
+      </template>
 
    <!--image preview-->
    <view class="preview" hidden="{{isHidePreivew}}">

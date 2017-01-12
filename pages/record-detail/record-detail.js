@@ -2,6 +2,7 @@ var app = getApp()
 var api = require('../../backend/api.js');
 var imageHelper = require('../../utils/imageHelper.js');
 var utils = require('../../utils/util.js');
+var audioHelper = require('../../utils/audioHelper.js');
 
 var staticIndex=0;
 Page({
@@ -11,7 +12,9 @@ Page({
       scrollLeft:1,
       checkItem:false,
       previewCoverUrl:"",
-      isHidePreivew:true
+      isHidePreivew:true,
+      isMusicPlaying:false,
+      MusicPlayingIndex:-1
     },
   scroll: function(e) {
     var pixelRatio=app.globalData.pixelRatio;
@@ -87,6 +90,7 @@ Page({
     this.setData({
       scrollLeft:this.data.scrollLeft+1
     })
+    this.setMusicLister();
   },
   onShow:function(){
     // 页面显示
@@ -97,6 +101,7 @@ Page({
   },
   onUnload:function(){
     // 页面关闭
+    wx.stopBackgroundAudio();
   },
   actionImagePreview:function(e){
     //图片预览
@@ -116,7 +121,7 @@ Page({
   clearAllindex:function(currentList){
       for(var i=0;i<currentList.length;i++){
           currentList[i].selected="";
-    }
+      }
   },
   manageScrollResult:function(index){
     var currentList= this.data.tracklist;
@@ -154,6 +159,12 @@ Page({
       //唱片图片
       recordObj.Images[i]=coverObj;
     }
+    for(var i=0;i<recordObj.Audios.length;i++){
+        var item = recordObj.Audios[i];
+        item.selected="";
+        item.index=i;
+        item.isMusicPlaying=false;
+    }
     this.setData({
       record:recordObj
     })
@@ -166,6 +177,89 @@ Page({
     // this.setData({
     //   scrollLeft:this.data.record.Images[index].position
     // })
+  },
+  //播放音乐
+  actionPlayMusic:function(e){
+    var page = this;
+    var index =e.currentTarget.dataset.index;
+    var audios = this.data.record.Audios;
+    var item = audios[index];
+    if(this.data.MusicPlayingIndex==index&&this.data.isMusicPlaying){
+        item.isMusicPlaying=false;
+        this.setData({
+          record:this.data.record,
+        })
+        this.changeMusicStatus(false);
+        wx.pauseBackgroundAudio();
+        return;
+    }
+    var url = e.currentTarget.dataset.audiourl;
+    var newUrl = audioHelper.musicUrlContact(url);
+
+    //play
+    wx.playBackgroundAudio({
+      dataUrl: newUrl,
+      title:"title",
+      coverImgUrl:"coverImgUrl",
+      success: function(res){
+        // success
+        console.log('success');
+        page.managePlaySucess(index);
+      },
+      fail: function(e) {
+        // fail
+        console.log('fail~');
+        console.log(e);
+      },
+      complete: function() {
+        // complete
+        console.log('complete');
+      }
+    })
+  },
+  managePlaySucess(index){
+    //重置状态
+    var audios = this.data.record.Audios;
+     for(var i=0;i<audios.length;i++){
+          audios[i].selected="";
+          audios[i].isMusicPlaying=false;
+      }
+     audios[index].selected="selected";
+     audios[index].isMusicPlaying=true;
+      console.log('index '+index);
+      console.log(audios[index]);
+     this.setData({
+        record:this.data.record,
+        MusicPlayingIndex:index
+      })
+     this.changeMusicStatus(true);
+  },
+  //改变播放音乐的状态
+  changeMusicStatus(status){
+      this.setData({
+        isMusicPlaying:status
+      })
+  },
+  //监听音乐播放
+  setMusicLister(){
+    var that = this;
+    wx.onBackgroundAudioPause(function() {
+      console.log('Pause');
+      // callback
+    }),
+    wx.onBackgroundAudioStop(function() {
+      // callback
+      console.log('Stop');
+      var audios = that.data.record.Audios;
+      for(var i=0;i<audios.length;i++){
+          audios[i].selected="";
+          audios[i].isMusicPlaying=false;
+      }
+      that.setData({
+        record:that.data.record,
+        MusicPlayingIndex:-1
+      })
+    })
   },
   //分享界面
   onShareAppMessage:function(){
