@@ -4,6 +4,11 @@ var imageHelper = require('../../utils/imageHelper.js');
 var utils = require('../../utils/util.js');
 var audioHelper = require('../../utils/audioHelper.js');
 
+var musicPlayIcon={
+    play:'../../image/ic_detail_music_p.png',
+    pause:'../../image/ic_detail_music_n.png'
+}
+
 var staticIndex=0;
 Page({
     data:{

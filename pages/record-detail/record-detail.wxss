@@ -152,7 +152,7 @@ text.value{
   padding-top: 30rpx;
   padding-right: 30rpx;
   padding-bottom: 30rpx;
-  width: 100%;
+  width: 720rpx;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -164,13 +164,6 @@ text.value{
     height: 52rpx;
     flex:none 1 120rpx;
 }
-
-.media-list-item .item-image.play{
-    background-image: url('../../image/ic_detail_music_p.png');
-    background-size:52rpx 52rpx;
-    background-repeat:no-repeat;
-}
-
 
 .media-list-item .item-content{
   display: flex;

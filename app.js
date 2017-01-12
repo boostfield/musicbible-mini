@@ -44,12 +44,12 @@ App({
     //获取设备信息
       try {
         var res = wx.getSystemInfoSync()
-        console.log(res.model)
-        console.log(res.pixelRatio)
-        console.log(res.windowWidth)
-        console.log(res.windowHeight)
-        console.log(res.language)
-        console.log(res.version)
+        // console.log(res.model)
+        // console.log(res.pixelRatio)
+        // console.log(res.windowWidth)
+        // console.log(res.windowHeight)
+        // console.log(res.language)
+        // console.log(res.version)
         this.globalData.pixelRatio=res.pixelRatio;
         this.globalData.windowWidth=res.windowWidth;
       } catch (e) {
