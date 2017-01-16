@@ -4,11 +4,12 @@ Page({
  onLoad:function(options){
  // 页面初始化 options为页面跳转所带来的参数
  var that = getApp()
-if(true){
-    wx.switchTab({
-    url: '../record/record',
-  })
-}
+  if(true){
+      wx.switchTab({
+      url: '../record/record',
+    })
+    return;
+  }
 
   try {
   //首先检查缓存中是否有我们需要请求的数据，如果没有，我们再跟服务器连接，获取数据

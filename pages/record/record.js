@@ -142,7 +142,10 @@ Page({
   },
   //渲染推荐唱片数据
   renderRecommendData:function(res,isAdd){
-    var recommendObj =this.data.record_recommed;
+     console.log('Recommend  pageData')
+    var pageData = this.data;
+    console.log(pageData)
+    var recommendObj =pageData.record_recommed;
     var list = res.result.DataList;
     for (var i=0;i<list.length;i++)
     {
@@ -159,7 +162,11 @@ Page({
   },
   //渲染最新唱片数据
   renderLatestData:function(res,isAdd){
-    var latestObj =this.data.record_latest;
+    console.log('Latest  pageData')
+    var pageData = this.data;
+    console.log(pageData)
+
+    var latestObj =pageData.record_latest;
     var list = res.result.DataList;
     for (var i=0;i<list.length;i++)
     {
