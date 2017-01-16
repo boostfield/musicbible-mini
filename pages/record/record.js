@@ -16,41 +16,52 @@ Page({
   data: {
     currentType:lp_type[0],
     tabSelect:[false,true],
+    isLoading:false,
     footerString:FOOTER_LOADING,
     isHideFooterLoading:true,
     record_recommed:{
       index:1,
-      pageSize:10,
+      pageSize:8,
       list:[]
       },
     record_latest:{
       index:1,
-      pageSize:10,
+      pageSize:8,
       list:[]
       },
   },
   onLoad: function () {
     console.log('onLoad')
     //获取推荐唱片列表
-    this.reqRecommendData(this.renderRecommendData,false,this);
+    this.reqRecommendData(this.renderRecommendData,false);
     //获取最新唱片列表
-    this.reqLatestData(this.renderLatestData,false,this);
+    this.reqLatestData(this.renderLatestData,false);
   },
-  reqRecommendData:function(callback,isAdd,currentPage){
+  //请求推荐唱片信息
+  reqRecommendData:function(callback,isAdd){
+    var currentPage = this;
+    var currentData = currentPage.data;
+    currentPage.setData({
+      isLoading:true
+    })
     wx.showNavigationBarLoading();
       if(isAdd){
-        var index = currentPage.data.record_recommed.index+1;
+        var index = currentData.record_recommed.index+1;
       }else{
         var index=1;
       }
+      //api请求
       api.getRecommendReocrdList(null,{
         page:index,
         pageSize:this.data.record_recommed.pageSize
       },function(res){
+        currentPage.setData({
+            isLoading:false
+          })
         wx.hideNavigationBarLoading();
           if(isAdd){
              if(res.data.result.DataList.length>0){
-              currentPage.data.record_recommed.index =index;
+              currentData.record_recommed.index =index;
               currentPage.setData({
                   footerString:FOOTER_LOADING,
                   isHideFooterLoading:true
@@ -69,30 +80,29 @@ Page({
         console.log(res);
         callback && callback.call(null,res.data,isAdd)
       },function(res){
-         wx.hideNavigationBarLoading();
-          if(isAdd){
-            console.log('上拉刷新出现问题');
-            currentPage.setData({
-                 isHideFooterLoading:true
-            });
-          }else{
-            console.log('下拉刷新出现问题')
-            wx.stopPullDownRefresh()
-          }
+         currentPage.managetErrorResult();
       })
   },
-  reqLatestData:function(callback,isAdd,currentPage){
+  //请求最新的唱片信息
+  reqLatestData:function(callback,isAdd){
+    var currentPage=this;
+      this.setData({
+        isLoading:true
+      })
       wx.showNavigationBarLoading();
      if(isAdd){
         var index = currentPage.data.record_latest.index+1;
       }else{
         var index=1;
       }
-      console.log("最新的index  "+index);
+      //api请求
       api.getLatestRecordList(null,{
         page:index,
         pageSize:this.data.record_latest.pageSize
       },function(res){
+          currentPage.setData({
+            isLoading:false
+          })
           wx.hideNavigationBarLoading();
           if(isAdd){
             if(res.data.result.DataList.length>0){
@@ -110,25 +120,28 @@ Page({
             console.log('上拉刷新完成');
           }else{
             console.log('下拉刷新完成')
-            wx.stopPullDownRefresh()
           }
         console.log(res);
         callback && callback.call(null,res.data,isAdd)
       },function(res){
-          wx.hideNavigationBarLoading();
-          if(isAdd){
-            console.log('上拉刷新出现问题');
-            currentPage.setData({
-                 isHideFooterLoading:true
-            });
-          }else{
-            console.log('下拉刷新出现问题')
-            wx.stopPullDownRefresh()
-          }
+        currentPage.managetErrorResult();
       })
   },
+  //处理网络请求的错误结果
+  managetErrorResult(){
+      wx.hideNavigationBarLoading();
+      if(isAdd){
+        console.log('上拉刷新出现问题');
+        currentPage.setData({
+              isHideFooterLoading:true
+         });
+       }else{
+         console.log('下拉刷新出现问题')
+        wx.stopPullDownRefresh()
+       }
+  },
+  //渲染推荐唱片数据
   renderRecommendData:function(res,isAdd){
-    //渲染推荐唱片数据
     var recommendObj =this.data.record_recommed;
     var list = res.result.DataList;
     for (var i=0;i<list.length;i++)
@@ -144,8 +157,8 @@ Page({
       record_recommed:recommendObj
     })
   },
+  //渲染最新唱片数据
   renderLatestData:function(res,isAdd){
-    //渲染最新唱片数据
     var latestObj =this.data.record_latest;
     var list = res.result.DataList;
     for (var i=0;i<list.length;i++)
@@ -184,13 +197,15 @@ Page({
   //上拉刷新
   onReachBottom: function () {
     console.log("触发上拉刷新");
+    console.log("isLoading="+this.data.isLoading)
+    if(this.data.isLoading) return
     this.setData({
         isHideFooterLoading:false
     });
     if(this.data.currentType===lp_type[0]){
-      this.reqRecommendData(this.renderRecommendData,true,this);
+      this.reqRecommendData(this.renderRecommendData,true);
     }else{
-      this.reqLatestData(this.renderLatestData,true,this);
+      this.reqLatestData(this.renderLatestData,true);
     }
     //延迟加载
     //setTimeout(this.onBottomRefreshSucess,2000);

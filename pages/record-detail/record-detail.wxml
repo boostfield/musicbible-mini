@@ -47,7 +47,7 @@
             </view>
         </view>
        <!--block basic-info-->
-       <view class="section-main section-basic-info">
+       <view class="section-main section-basic-info" wx:if="{{record.Audios.length!=0}}">
           <text class="title">音乐试听</text>
        </view>
 

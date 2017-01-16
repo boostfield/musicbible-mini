@@ -143,7 +143,7 @@ text.value{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-
+    margin-bottom: 30rpx;
 }
 
 .media-list-item{

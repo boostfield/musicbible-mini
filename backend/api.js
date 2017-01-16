@@ -16,7 +16,7 @@ function getRecommendReocrdList(header,data,sucess,fail){
     wx.request({
         url:url,
         header:{
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'content-type': 'application/json',
             'Accept': 'application/json',
         },
         method:'GET',
@@ -40,7 +40,7 @@ function getLatestRecordList(header,data,sucess,fail){
     wx.request({
         url:url,
         header:{
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'content-type': 'application/json',
             'Accept': 'application/json',
         },
         method:'POST',
@@ -65,7 +65,7 @@ function getHotKeyWords(header,data,sucess,fail){
     wx.request({
         url:url,
         header:{
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'content-type': 'application/json',
             'Accept': 'application/json',
         },
         method:'GET',
@@ -85,7 +85,7 @@ function getAssociateWords(header,data,sucess,fail){
     wx.request({
         url:url,
         header:{
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'content-type': 'application/json',
             'Accept': 'application/json',
         },
         method:'GET',
@@ -105,7 +105,7 @@ function getSearchResultRecordList(header,data,sucess,fail){
     wx.request({
         url:url,
         header:{
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'content-type': 'application/json',
             'Accept': 'application/json',
         },
         method:'GET',
@@ -131,7 +131,7 @@ function getRecordDetail(header,data,sucess,fail){
     wx.request({
         url:url,
         header:{
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'content-type': 'application/json',
             'Accept': 'application/json',
         },
         method:'GET',
