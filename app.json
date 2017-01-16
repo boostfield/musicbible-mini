@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/splash/splash",
     "pages/record/record",
     "pages/search/search",
     "pages/record-detail/record-detail"
