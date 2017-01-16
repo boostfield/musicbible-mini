@@ -142,7 +142,6 @@ Page({
   },
   //渲染推荐唱片数据
   renderRecommendData:function(res,isAdd){
-     console.log('Recommend  pageData')
     var pageData = this.data;
     console.log(pageData)
     var recommendObj =pageData.record_recommed;
@@ -162,7 +161,6 @@ Page({
   },
   //渲染最新唱片数据
   renderLatestData:function(res,isAdd){
-    console.log('Latest  pageData')
     var pageData = this.data;
     console.log(pageData)
 
@@ -185,6 +183,7 @@ Page({
   //推荐按钮 点击
   recommend_onclick:function(){
       this.setData({
+        footerString:FOOTER_LOADING,
         currentType:lp_type[0],
         tabSelect:[false,true]
       })
@@ -192,6 +191,7 @@ Page({
   //最新按钮 点击
   latest_onclick:function(){
       this.setData({
+        footerString:FOOTER_LOADING,
         currentType:lp_type[1],
         tabSelect:[true,false]
       })
