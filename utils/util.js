@@ -16,10 +16,7 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
-module.exports = {
-  formatTime: formatTime,
-  trim:trim
-}
+
 //检查期望参数长度是否与真是参数长度一致
 function checkArguments(args){
   var actual=args.length;
@@ -31,4 +28,9 @@ function checkArguments(args){
 //类似trim()的函数
 function trim(t){
   return (t||"").replace(/^\s+|\s+$/g, "");
+}
+
+module.exports = {
+  formatTime: formatTime,
+  trim:trim
 }

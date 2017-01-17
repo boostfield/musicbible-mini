@@ -132,14 +132,20 @@ Page({
     var currentList= this.data.tracklist;
   },
   reqRecordDetailData:function(callback){
+    wx.showToast({
+        title: '加载中...',
+        icon: 'loading',
+        duration: 2000
+      })  
     //请求唱片详情数据
       api.getRecordDetail(null,{
         id:this.data.record.id
       },function(res){
+         wx.hideToast()
         console.log(res);
         callback && callback.call(null,res.data)
       },function(res){
-
+          wx.hideToast()
       })
   },
   renderRecordDetailData:function(data){

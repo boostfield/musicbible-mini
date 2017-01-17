@@ -1,8 +1,9 @@
 //index.js
 //获取应用实例
-var app = getApp();
-var api = require('../../backend/api.js');
-var imageHelper = require('../../utils/imageHelper.js');
+var app = getApp()
+var api = require('../../backend/api.js')
+var imageHelper = require('../../utils/imageHelper.js')
+var toastUtils =require('../../utils/toastUtils.js')
 
 var LP_RECOMMEND=1;
 var LP_LATEST=2;
@@ -44,7 +45,7 @@ Page({
     currentPage.setData({
       isLoading:true
     })
-    wx.showNavigationBarLoading();
+    toastUtils.showLoadingToast()
       if(isAdd){
         var index = currentData.record_recommed.index+1;
       }else{
@@ -58,7 +59,7 @@ Page({
         currentPage.setData({
             isLoading:false
           })
-        wx.hideNavigationBarLoading();
+        toastUtils.hideToast()
           if(isAdd){
              if(res.data.result.DataList.length>0){
               currentData.record_recommed.index =index;
@@ -89,7 +90,7 @@ Page({
       this.setData({
         isLoading:true
       })
-      wx.showNavigationBarLoading();
+      toastUtils.showLoadingToast()
      if(isAdd){
         var index = currentPage.data.record_latest.index+1;
       }else{
@@ -103,7 +104,7 @@ Page({
           currentPage.setData({
             isLoading:false
           })
-          wx.hideNavigationBarLoading();
+          toastUtils.hideToast()
           if(isAdd){
             if(res.data.result.DataList.length>0){
               currentPage.data.record_latest.index =index;
@@ -129,7 +130,7 @@ Page({
   },
   //处理网络请求的错误结果
   managetErrorResult(){
-      wx.hideNavigationBarLoading();
+      toastUtils.hideToast();
       if(isAdd){
         console.log('上拉刷新出现问题');
         currentPage.setData({
