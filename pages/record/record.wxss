@@ -36,8 +36,7 @@
   bottom: 0rpx;
   left: 102.5rpx;
 }
-.scroll-wrapper{
-}
+
 .content{
   margin-top: 94rpx;
   box-sizing: border-box;

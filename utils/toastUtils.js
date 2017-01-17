@@ -2,7 +2,7 @@ function showLoadingToast(){
     wx.showToast({
         title: '加载中...',
         icon: 'loading',
-        duration: 3000
+        duration: 10000
     })  
 }
 function showSuccessToast(){

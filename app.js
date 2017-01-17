@@ -10,6 +10,7 @@ App({
   onHide:function(){
     //小程序隐藏
   },
+  //获取用户信息
   getUserInfo:function(cb){
     var that = this
     if(this.globalData.userInfo){

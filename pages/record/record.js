@@ -15,7 +15,7 @@ var FOOTER_NO_MORE="没有更多了";
 var FOOT_Strings=["loading","nomore"];
 Page({
   data: {
-    currentType:lp_type[0],
+    currentTab:lp_type[0],
     tabSelect:[false,true],
     isLoading:false,
     footerString:FOOTER_LOADING,
@@ -185,7 +185,7 @@ Page({
   recommend_onclick:function(){
       this.setData({
         footerString:FOOTER_LOADING,
-        currentType:lp_type[0],
+        currentTab:lp_type[0],
         tabSelect:[false,true]
       })
   },
@@ -193,7 +193,7 @@ Page({
   latest_onclick:function(){
       this.setData({
         footerString:FOOTER_LOADING,
-        currentType:lp_type[1],
+        currentTab:lp_type[1],
         tabSelect:[true,false]
       })
   },
@@ -210,7 +210,7 @@ Page({
     this.setData({
         isHideFooterLoading:false
     });
-    if(this.data.currentType===lp_type[0]){
+    if(this.data.currentTab===lp_type[0]){
       this.reqRecommendData(this.renderRecommendData,true);
     }else{
       this.reqLatestData(this.renderLatestData,true);

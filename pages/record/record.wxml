@@ -14,14 +14,12 @@
 
 
   <view class="content content_recommend" hidden="{{tabSelect[0]}}">
-      <scroll-view scroll-y="true"  class="scroll-wrapper" >
         <view class="grid">
           <block  wx:for="{{record_recommed.list}}" >
             <template is="grid-items" data="{{...item}}"/>
           </block>
         </view>
         <view class="loading" hidden="{{isHideFooterLoading}}"><text>{{footerString}}</text></view>
-      </scroll-view>
   </view>
 
   <!--推荐-->
