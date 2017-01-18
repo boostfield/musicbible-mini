@@ -79,7 +79,7 @@ Page({
             wx.stopPullDownRefresh()
           }
         console.log(res);
-        callback && callback.call(null,res.data,isAdd)
+        callback && callback.call(currentPage,res.data,isAdd)
       },function(res){
          currentPage.managetErrorResult();
       })
@@ -123,7 +123,7 @@ Page({
             console.log('下拉刷新完成')
           }
         console.log(res);
-        callback && callback.call(null,res.data,isAdd)
+        callback && callback.call(currentPage,res.data,isAdd)
       },function(res){
         currentPage.managetErrorResult();
       })
