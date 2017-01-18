@@ -132,6 +132,7 @@ Page({
     var currentList= this.data.tracklist;
   },
   reqRecordDetailData:function(callback){
+    var that = this;
     wx.showToast({
         title: '加载中...',
         icon: 'loading',
@@ -143,7 +144,7 @@ Page({
       },function(res){
          wx.hideToast()
         console.log(res);
-        callback && callback.call(null,res.data)
+        callback && callback.call(that,res.data)
       },function(res){
           wx.hideToast()
       })

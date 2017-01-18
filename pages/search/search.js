@@ -114,9 +114,9 @@ Page({
     }, 
     //请求关键字数据
   reqKeyWordsData:function(callback){
-    
+    var that = this;
     api.getHotKeyWords(null,{},function(res){
-        callback && callback.call(null,res.data)
+        callback && callback.call(that,res.data)
     },function(res){
        console.log('获取热门关键词错误');
     })
@@ -132,6 +132,7 @@ Page({
   },
   //请求关联词
   reqAssociateWordsData:function(callback){
+    var that = this;
     var words= this.data.searchContent;
     if (!words) {
         return;
@@ -140,7 +141,7 @@ Page({
     api.getAssociateWords(null,{
       keyword:words
     },function(res){
-        callback && callback.call(null,res.data,false)
+        callback && callback.call(that,res.data,false)
     },function(res){
        console.log('获取关联词错误');
     })
@@ -156,6 +157,7 @@ Page({
     }
   },
 reqResultData:function(callback,isAdd,currentPage){
+    var that = this;
     //请求搜索结果数据
     toastUtils.showLoadingToast()
       if(isAdd){
@@ -188,7 +190,7 @@ reqResultData:function(callback,isAdd,currentPage){
             wx.stopPullDownRefresh()
           }
         console.log(res);
-        callback && callback.call(null,res.data,isAdd)
+        callback && callback.call(that,res.data,isAdd)
       },function(res){
           toastUtils.hideToast();
           if(isAdd){
