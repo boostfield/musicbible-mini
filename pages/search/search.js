@@ -210,8 +210,10 @@ reqResultData:function(callback,isAdd,currentPage){
     var list = res.result.DataList;
     for (var i=0;i<list.length;i++)
     {
-      //唱片图片
-      list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
+      //唱片图片
+      if(list[i].AppCoverUrl){
+        list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
+      }
       list[i].index=i+currentLength;
     }
     if(isAdd){
@@ -221,18 +223,5 @@ reqResultData:function(callback,isAdd,currentPage){
     this.setData({
       record_search:recommendObj
     })
-  },
-  //错误图片用默认图替代
-  imageLoadErrorHander(e){
-      var page = this;
-      var pageData= page.data;
-      console.log("picturn error");
-      console.log(e);
-      var index = e.currentTarget.dataset.index;
-      console.log('index'+index);
-      pageData.record_search.list[index].AppCoverUrl = '../../image/img_record_default.png'
-      page.setData({
-          record_search:pageData.record_search
-      })
   }
 })

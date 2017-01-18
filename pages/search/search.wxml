@@ -49,7 +49,7 @@
     <!--搜索列表的模板-->              
     <template name="list-items">
            <navigator url="../record-detail/record-detail?id={{Id}}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{AppCoverUrl}}" mode="scaleToFill" data-index="{{index}}" binderror="imageLoadErrorHander"></image>
+                      <image class="item-image" src="{{AppCoverUrl?AppCoverUrl:'../../image/img_record_default.png'}}" mode="scaleToFill" data-index="{{index}}" ></image>
                       <view class="item-content">
                       <text class="title item-title">{{TitleCN}}</text>
                       <text  class="title item-subtitle">{{TitleEN}}</text>
