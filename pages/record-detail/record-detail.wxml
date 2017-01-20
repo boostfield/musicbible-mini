@@ -46,17 +46,6 @@
               <text class="attribute" bindtap="onTest">艺术家：</text> <text class="value">{{record.HiFiArtists[0]?record.HiFiArtists[0]:"无"}}</text>
             </view>
         </view>
-       <!--block basic-info-->
-       <view class="section-main section-basic-info" wx:if="{{record.Audios.length!=0}}">
-          <text class="title">音乐试听</text>
-       </view>
-
-        <view class="media-list">
-            <block  wx:for="{{record.Audios}}" >
-              <template is="media-list-item" data="{{...item}}"/>
-            </block>
-        </view>
-       
   </view>
 
 

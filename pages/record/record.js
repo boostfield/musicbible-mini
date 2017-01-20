@@ -218,4 +218,12 @@ Page({
     //延迟加载
     //setTimeout(this.onBottomRefreshSucess,2000);
   },
+      //分享界面
+  onShareAppMessage:function(){
+     return {
+      title: '音乐圣经黑胶库',
+      desc: '推荐唱片&最新唱片',
+      path: 'pages/record/record'
+    }
+  }
 })

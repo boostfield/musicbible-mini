@@ -95,7 +95,6 @@ Page({
     this.setData({
       scrollLeft:this.data.scrollLeft+1
     })
-    this.setMusicLister();
   },
   onShow:function(){
     // 页面显示
@@ -190,94 +189,11 @@ Page({
     //   scrollLeft:this.data.record.Images[index].position
     // })
   },
-  //播放音乐
-  actionPlayMusic:function(e){
-    var page = this;
-    var index =e.currentTarget.dataset.index;
-    var audios = this.data.record.Audios;
-    var item = audios[index];
-    if(this.data.MusicPlayingIndex==index&&this.data.isMusicPlaying){
-        item.isMusicPlaying=false;
-        this.setData({
-          record:this.data.record,
-        })
-        this.changeMusicStatus(false);
-        wx.pauseBackgroundAudio();
-        return;
-    }
-    var url = e.currentTarget.dataset.audiourl;
-    var newUrl = audioHelper.musicUrlContact(url);
-
-    //play
-    wx.playBackgroundAudio({
-      dataUrl: newUrl,
-      title:"title",
-      coverImgUrl:"coverImgUrl",
-      success: function(res){
-        // success
-        console.log('success');
-        page.managePlaySucess(index);
-      },
-      fail: function(e) {
-        // fail
-        console.log('fail~');
-        console.log(e);
-      },
-      complete: function() {
-        // complete
-        console.log('complete');
-      }
-    })
-  },
-  managePlaySucess(index){
-    //重置状态
-    var audios = this.data.record.Audios;
-     for(var i=0;i<audios.length;i++){
-          audios[i].selected="";
-          audios[i].isMusicPlaying=false;
-      }
-     audios[index].selected="selected";
-     audios[index].isMusicPlaying=true;
-      console.log('index '+index);
-      console.log(audios[index]);
-     this.setData({
-        record:this.data.record,
-        MusicPlayingIndex:index
-      })
-     this.changeMusicStatus(true);
-  },
-  //改变播放音乐的状态
-  changeMusicStatus(status){
-      this.setData({
-        isMusicPlaying:status
-      })
-  },
-  //监听音乐播放
-  setMusicLister(){
-    var that = this;
-    wx.onBackgroundAudioPause(function() {
-      console.log('Pause');
-      // callback
-    }),
-    wx.onBackgroundAudioStop(function() {
-      // callback
-      console.log('Stop');
-      var audios = that.data.record.Audios;
-      for(var i=0;i<audios.length;i++){
-          audios[i].selected="";
-          audios[i].isMusicPlaying=false;
-      }
-      that.setData({
-        record:that.data.record,
-        MusicPlayingIndex:-1
-      })
-    })
-  },
   //分享界面
   onShareAppMessage:function(){
      return {
       title: this.data.record.TitleCN,
-      desc: this.data.record.InfoSections[1].Text,
+      desc: this.data.record.TitleEN,
       path: 'pages/record-detail/record-detail?id='+this.data.record.Id
     }
   }

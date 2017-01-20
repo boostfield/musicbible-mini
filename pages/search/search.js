@@ -225,5 +225,13 @@ reqResultData:function(callback,isAdd,currentPage){
     this.setData({
       record_search:recommendObj
     })
+  },
+    //分享界面
+  onShareAppMessage:function(){
+     return {
+      title: '音乐圣经黑胶库',
+      desc: '搜索唱片',
+      path: 'pages/search/search'
+    }
   }
 })
