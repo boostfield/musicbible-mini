@@ -68,9 +68,11 @@ Page({
                   isHideFooterLoading:true
               });
             }else{
+              toastUtils.showNoMoreToast()
               currentPage.setData({
                  footerString:FOOTER_NO_MORE,
-                 isHideFooterLoading:false
+                 isHideFooterLoading:false,
+                 
               });
             }
             console.log('上拉刷新完成');
@@ -79,7 +81,7 @@ Page({
             wx.stopPullDownRefresh()
           }
         console.log(res);
-        callback && callback.call(null,res.data,isAdd)
+        callback && callback.call(currentPage,res.data,isAdd)
       },function(res){
          currentPage.managetErrorResult();
       })
@@ -123,7 +125,7 @@ Page({
             console.log('下拉刷新完成')
           }
         console.log(res);
-        callback && callback.call(null,res.data,isAdd)
+        callback && callback.call(currentPage,res.data,isAdd)
       },function(res){
         currentPage.managetErrorResult();
       })
@@ -150,7 +152,9 @@ Page({
     for (var i=0;i<list.length;i++)
     {
       //唱片图片
-      list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
+      if(list[i].AppCoverUrl){
+        list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
+      }
     }
     if(isAdd){
       list = recommendObj.list.concat(list);
@@ -169,8 +173,9 @@ Page({
     var list = res.result.DataList;
     for (var i=0;i<list.length;i++)
     {
-      //唱片图片
-      list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
+      if(list[i].AppCoverUrl){
+        list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
+      }
     }
     
     if(isAdd){
@@ -186,7 +191,8 @@ Page({
       this.setData({
         footerString:FOOTER_LOADING,
         currentTab:lp_type[0],
-        tabSelect:[false,true]
+        tabSelect:[false,true],
+        scrollTop:100
       })
   },
   //最新按钮 点击
@@ -194,7 +200,8 @@ Page({
       this.setData({
         footerString:FOOTER_LOADING,
         currentTab:lp_type[1],
-        tabSelect:[true,false]
+        tabSelect:[true,false],
+        scrollTop:100
       })
   },
   //下拉刷新
@@ -218,4 +225,12 @@ Page({
     //延迟加载
     //setTimeout(this.onBottomRefreshSucess,2000);
   },
+  //分享界面
+  onShareAppMessage:function(){
+     return {
+      title: '音乐圣经黑胶库',
+      desc: '推荐唱片&最新唱片',
+      path: 'pages/record/record'
+    }
+  }
 })
