@@ -5,6 +5,13 @@ function showLoadingToast(){
         duration: 10000
     })  
 }
+function showNoMoreToast(){
+    wx.showToast({
+        title: '没有更多了',
+        icon: 'success',
+        duration: 1000
+    })  
+}
 function showSuccessToast(){
     wx.showToast({
         title: '成功',
@@ -19,6 +26,7 @@ function hideToast(){
 
 module.exports = {
   showLoadingToast: showLoadingToast,
+  showNoMoreToast:showNoMoreToast,
   showSuccessToast:showSuccessToast,
   hideToast:hideToast
 }
