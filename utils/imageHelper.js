@@ -1,4 +1,4 @@
-var ORIGIN = "origin";
+var ORIGIN = "watermark";
 var DISKCOVER="diskCover";
 var THUMBNAIL = "thumbnail";
 

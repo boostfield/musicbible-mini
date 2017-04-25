@@ -3,21 +3,21 @@
       <!--scroll-view-->
 
         <scroll-view id="scroll" class="scroll-view_H" scroll-x="true" style="width: 100%"  bindscroll="scroll"  scroll-left="{{scrollLeft}}"  >
-          <block wx:for="{{record.Images}}">
-            <image id="{{item.id}}" class="scroll-view-item_H" src="{{item.imageCoverUrl}}" bindtap="actionImagePreview" data-cover="{{Images}}"></image>
+          <block wx:for="{{record.images}}">
+            <image id="{{item.id}}" class="scroll-view-item_H" src="{{item.cover_url}}" bindtap="actionImagePreview" data-cover="{{images}}"></image>
           </block>
         </scroll-view>
 
         <!--dots-->
         <view class="dots">
-          <block wx:for="{{record.Images}}">
+          <block wx:for="{{record.images}}">
             <view class="dot {{item.selected}}" ></view>
           </block>
         </view>
        <!--title-->
        <view class="text-title">
-          <text class="title">{{record.TitleCN}}</text>
-          <text class="subtitle">{{record.TitleEN}}</text>
+          <text class="title">{{record.title_cn}}</text>
+          <text class="subtitle">{{record.title_en}}</text>
        </view>
 
        <!--block basic-info-->
@@ -27,23 +27,33 @@
 
         <!-- record detail -->
         <view class="text-content">
-            <view class="section intro" hidden="{{record.MediumType?false:true}}">
-              <text class="attribute">唱片介质：</text> <text class="value">{{record.MediumType?record.MediumType:"无"}}</text>
+            <view class="section intro" hidden="{{record.medium_name?false:true}}">
+              <text class="attribute">唱片介质：</text> <text class="value">{{record.medium_name?record.medium_name:"无"}}</text>
             </view>
-            <view class="section serialnumber" hidden="{{record.SerilNumber?false:true}}">
-              <text class="attribute">唱片编号：</text> <text class="value">{{record.SerilNumber?record.SerilNumber:"无"}}</text>
+            <view class="section serialnumber" hidden="{{record.serial_number?false:true}}">
+              <text class="attribute">唱片编号：</text> <text class="value">{{record.serial_number?record.serial_number:"无"}}</text>
             </view>
-            <view class="section year" hidden="{{record.PubYear?false:true}}">
-              <text class="attribute">唱片年份：</text> <text class="value">{{record.PubYear?record.PubYear:"无"}}</text>
+            <view class="section year" hidden="{{record.publish_year?false:true}}">
+              <text class="attribute">唱片年份：</text> <text class="value">{{record.publish_year?record.publish_year:"无"}}</text>
             </view>
-            <view class="section lable" hidden="{{record.RecordPublisher.NameEN?false:true}}">
-              <text class="attribute">唱片厂牌：</text> <text class="value">{{record.RecordPublisher.NameEN?record.RecordPublisher.NameEN:"无"}}</text>
+            <view class="section lable" hidden="{{record.publisher?false:true}}">
+              <text class="attribute">唱片厂牌：</text> <text class="value">{{record.publisher.title_en?record.publisher.title_en:"无"}}</text>
             </view>
-            <view class="section composor" hidden="{{record.HiFiComposers[0]?false:true}}">
-              <text class="attribute">作曲家：</text> <text class="value">{{record.HiFiComposers[0]?record.HiFiComposers[0]:"无"}}</text>
+            <view class="section composor" hidden="{{record.composers.length>0?false:true}}">
+              <text class="attribute">作曲家：</text>
+              <view class="value"><view class="inner-value" ><text class="inner-value" wx:for="{{record.composers}}">{{item.name_cn?item.name_cn:item.first_name_en + item.last_name_en }} </text></view></view>
             </view>
-            <view class="section artist" hidden="{{record.HiFiArtists[0]?false:true}}">
-              <text class="attribute" bindtap="onTest">艺术家：</text> <text class="value">{{record.HiFiArtists[0]?record.HiFiArtists[0]:"无"}}</text>
+            <view class="section artist" hidden="{{record.artists.length>0?false:true}}">
+              <text class="attribute" bindtap="onTest">艺术家：</text> 
+              <view class="value"><view class="inner-value" ><text class="inner-value" wx:for="{{record.artists}}">{{item.name_cn?item.name_cn:item.first_name_en + item.last_name_en }} </text></view></view>
+            </view>
+            <view class="section artist" hidden="{{record.conductors.length>0?false:true}}">
+              <text class="attribute" bindtap="onTest">指挥家：</text> 
+              <view class="value"><view class="inner-value" ><text class="inner-value" wx:for="{{record.conductors}}">{{item.name_cn?item.name_cn:item.first_name_en + item.last_name_en }} </text></view></view>
+            </view>
+            <view class="section artist" hidden="{{record.bands.length>0?false:true}}">
+              <text class="attribute" bindtap="onTest">乐团：</text> 
+              <view class="value"><view class="inner-value" ><text class="inner-value" wx:for="{{record.bands}}">{{item.name_cn?item.name_cn:item.first_name_en + item.last_name_en }} </text></view></view>
             </view>
         </view>
   </view>
@@ -51,10 +61,10 @@
 
     <!--音频的列表-->
     <template name="media-list-item">
-        <div class="media-list-item" data-audiourl="{{AudioUrl}}" data-index="{{index}}"  bindtap="actionPlayMusic">
+        <div class="media-list-item" data-audiourl="{{url}}" data-index="{{index}}"  bindtap="actionPlayMusic">
           <image class="item-image "  mode="scaleToFill" src="{{isMusicPlaying?'../../image/ic_detail_music_p.png':'../../image/ic_detail_music_n.png'}}"></image>
           <view class="item-content">
-              <text  class="title {{selected}}">{{Title?Title:""}}</text>
+              <text  class="title {{selected}}">{{title_cn?title_cn:""}}</text>
           </view>
         </div>
       </template>
@@ -62,9 +72,9 @@
    <!--image preview-->
    <view class="preview" hidden="{{isHidePreivew}}">
          <swiper class="swiper-body" indicator-dots="{{true}}"autoplay="{{false}}" interval="{{0}}" duration="{{0}}"  current="{{currentIndex}}" bindchange="onCurrentPageSelected" >
-            <block wx:for="{{record.Images}}">
+            <block wx:for="{{record.images}}">
               <swiper-item class="slide-item">
-                <image class="preview-image" src="{{item.imageCoverUrl}}"  mode="aspectFit"  bindtap="closePreview"></image>
+                <image class="preview-image" src="{{item.cover_url}}"  mode="aspectFit"  bindtap="closePreview"></image>
               </swiper-item>
             </block>
         </swiper>

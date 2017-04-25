@@ -172,7 +172,7 @@ reqResultData:function(callback,isAdd,currentPage){
       },function(res){
           toastUtils.hideToast()
           if(isAdd){
-             if(res.data.result.DataList.length>0){
+             if(res.data.result.dataList.length>0){
               currentPage.data.record_search.index =index;
               currentPage.setData({
                   footerString:FOOTER_LOADING,
@@ -209,12 +209,12 @@ reqResultData:function(callback,isAdd,currentPage){
     var recommendObj =this.data.record_search;
     var currentLength = recommendObj.list.length;
 
-    var list = res.result.DataList;
+    var list = res.result.dataList;
     for (var i=0;i<list.length;i++)
     {
       //唱片图片
-      if(list[i].AppCoverUrl){
-        list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
+      if(list[i].cover_url){
+        list[i].cover_url=imageHelper.imageUrlDispatcher(list[i].cover_url,imageHelper.DISKCOVER);
       }
       list[i].index=i+currentLength;
     }

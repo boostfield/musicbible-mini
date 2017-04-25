@@ -61,7 +61,7 @@ Page({
           })
         toastUtils.hideToast()
           if(isAdd){
-             if(res.data.result.DataList.length>0){
+             if(res.data.result.dataList.length>0){
               currentData.record_recommed.index =index;
               currentPage.setData({
                   footerString:FOOTER_LOADING,
@@ -108,7 +108,7 @@ Page({
           })
           toastUtils.hideToast()
           if(isAdd){
-            if(res.data.result.DataList.length>0){
+            if(res.data.result.dataList.length>0){
               currentPage.data.record_latest.index =index;
               currentPage.setData({
                   footerString:FOOTER_LOADING,
@@ -148,12 +148,12 @@ Page({
     var pageData = this.data;
     console.log(pageData)
     var recommendObj =pageData.record_recommed;
-    var list = res.result.DataList;
+    var list = res.result.dataList;
     for (var i=0;i<list.length;i++)
     {
       //唱片图片
-      if(list[i].AppCoverUrl){
-        list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
+      if(list[i].cover_url){
+        list[i].cover_url=imageHelper.imageUrlDispatcher(list[i].cover_url,imageHelper.DISKCOVER);
       }
     }
     if(isAdd){
@@ -170,11 +170,11 @@ Page({
     console.log(pageData)
 
     var latestObj =pageData.record_latest;
-    var list = res.result.DataList;
+    var list = res.result.dataList;
     for (var i=0;i<list.length;i++)
     {
-      if(list[i].AppCoverUrl){
-        list[i].AppCoverUrl=imageHelper.imageUrlDispatcher(list[i].AppCoverUrl,imageHelper.DISKCOVER);
+      if(list[i].cover_url){
+        list[i].cover_url=imageHelper.imageUrlDispatcher(list[i].cover_url,imageHelper.DISKCOVER);
       }
     }
     

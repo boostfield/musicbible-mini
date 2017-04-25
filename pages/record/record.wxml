@@ -38,19 +38,19 @@
 
     <!--推荐的模板-->
     <template name="grid-items">
-        <navigator url="../record-detail/record-detail?id={{Id}}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{AppCoverUrl?AppCoverUrl:'../../image/img_record_default.png'}}" mode="scaleToFill"></image>
-                      <text class="title item-title">{{TitleCN?TitleCN:""}}</text>
-                      <text  class="title item-subtitle">{{TitleEN?TitleEN:""}}</text>
+        <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
+                      <image class="item-image" src="{{cover_url?cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill"></image>
+                      <text class="title item-title">{{title_cn?title_cn:""}}</text>
+                      <text  class="title item-subtitle">{{title_en?title_en:""}}</text>
         </navigator>
       </template>
     <!--最新的模板-->
     <template name="list-items">
-            <navigator url="../record-detail/record-detail?id={{Id}}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{AppCoverUrl?AppCoverUrl:'../../image/img_record_default.png'}}" mode="scaleToFill"></image>
+            <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
+                      <image class="item-image" src="{{cover_url?cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill"></image>
                       <view class="item-content">
-                      <text class="title item-title">{{TitleCN?TitleCN:""}}</text>
-                      <text  class="title item-subtitle">{{TitleEN?TitleEN:""}}</text>
+                      <text class="title item-title">{{title_cn?title_cn:""}}</text>
+                      <text  class="title item-subtitle">{{title_en?title_en:""}}</text>
                       </view>
            </navigator>
       </template>

@@ -30,7 +30,7 @@ Page({
     console.log("realDistance  "+realDistance);
     console.log("scrollWidth  "+scrollWidth);
     console.log("scrollLeft  "+e.detail.scrollLeft);
-    var currentList= this.data.record.Images;
+    var currentList= this.data.record.images;
     if(!this.data.checkItem){
        for(var i=0;i<currentList.length;i++){
         currentList[i].position=i*realDistance;
@@ -152,11 +152,11 @@ Page({
     //渲染唱片详情数据
     var recordObj=data.result;
     //唱片图片
-    recordObj.AppCoverUrl=imageHelper.imageUrlDispatcher(recordObj.AppCoverUrl,imageHelper.ORIGIN);
+    recordObj.cover_url=imageHelper.imageUrlDispatcher(recordObj.cover_url,imageHelper.ORIGIN);
     //唱片简介的去空格
-    recordObj.InfoSections[1].Text=utils.trim(recordObj.InfoSections[1].Text);
+    //recordObj.InfoSections[1].Text=utils.trim(recordObj.InfoSections[1].Text);
     //唱片封面图片列表【需要构造一下】
-    for (var i=0;i<recordObj.Images.length;i++)
+    for (var i=0;i<recordObj.images.length;i++)
     {
       var coverObj =new Object();
       if(i===0){
@@ -166,12 +166,12 @@ Page({
         coverObj.selected="";
       }
       coverObj.position=-1;
-      coverObj.imageCoverUrl=imageHelper.imageUrlDispatcher(recordObj.Images[i],imageHelper.ORIGIN);
+      coverObj.cover_url=imageHelper.imageUrlDispatcher(recordObj.images[i].url,imageHelper.ORIGIN);
       //唱片图片
-      recordObj.Images[i]=coverObj;
+      recordObj.images[i]=coverObj;
     }
-    for(var i=0;i<recordObj.Audios.length;i++){
-        var item = recordObj.Audios[i];
+    for(var i=0;i<recordObj.audios.length;i++){
+        var item = recordObj.audios[i];
         item.selected="";
         item.index=i;
         item.isMusicPlaying=false;
@@ -192,8 +192,8 @@ Page({
   //分享界面
   onShareAppMessage:function(){
      return {
-      title: this.data.record.TitleCN,
-      desc: this.data.record.TitleEN,
+      title: this.data.record.title_cn,
+      desc: this.data.record.title_en,
       path: 'pages/record-detail/record-detail?id='+this.data.record.Id
     }
   }

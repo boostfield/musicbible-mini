@@ -12,7 +12,7 @@ module.exports = {
 
 //获取推荐LP列表
 function getRecommendReocrdList(header,data,sucess,fail){
-    var url=app.globalData.HostV1_1+"/records/homerecommends";
+    var url=app.globalData.Host + "/record/top/list";
     wx.request({
         url:url,
         header:{
@@ -21,7 +21,7 @@ function getRecommendReocrdList(header,data,sucess,fail){
         },
         method:'GET',
         data:{
-            mediaType:"LP",
+            mediatype:"LP",
             page:data.page,
             pageSize:data.pageSize
         },
@@ -36,17 +36,16 @@ function getRecommendReocrdList(header,data,sucess,fail){
 
 //获取最新LP列表
 function getLatestRecordList(header,data,sucess,fail){
-    var url=app.globalData.Host+"/HiFiSearch/AdvancedSearch";
+    var url=app.globalData.Host+"/record/list";
     wx.request({
         url:url,
         header:{
             'content-type': 'application/json',
             'Accept': 'application/json',
         },
-        method:'POST',
+        method:'GET',
         data:{
-            MediaType:"LP",
-            MusicType:"classical",
+            mediatype:"LP",
             page:data.page,
             pageSize:data.pageSize
         },
@@ -61,7 +60,7 @@ function getLatestRecordList(header,data,sucess,fail){
 
 //获取热门关键词
 function getHotKeyWords(header,data,sucess,fail){
-    var url = app.globalData.Host+'/HiFiSearch/hot';
+    var url = app.globalData.Host+'/hotword';
     wx.request({
         url:url,
         header:{
@@ -81,7 +80,7 @@ function getHotKeyWords(header,data,sucess,fail){
 
 //获取搜索关联词列表 5个
 function getAssociateWords(header,data,sucess,fail){
-    var url = app.globalData.Host+'/HiFiSearch/SearchSuggestion?keyword='+data.keyword;
+    var url = app.globalData.Host+'/suggest?suggest=record&&keyword='+data.keyword;
     wx.request({
         url:url,
         header:{
@@ -101,7 +100,7 @@ function getAssociateWords(header,data,sucess,fail){
 
 //获取搜索结果列表
 function getSearchResultRecordList(header,data,sucess,fail){
-    var url=app.globalData.Host+"/HiFiSearch/search";
+    var url=app.globalData.Host+"/record/list";
     wx.request({
         url:url,
         header:{
@@ -113,8 +112,6 @@ function getSearchResultRecordList(header,data,sucess,fail){
             keyword:data.keyword,
             page:data.page,
             pageSize:data.pageSize,
-            searchtype:"RecordType",
-            charactertype:"-1"
         },
         success:function(res){
             sucess(res);
@@ -127,7 +124,7 @@ function getSearchResultRecordList(header,data,sucess,fail){
 
 //获取唱片详情页
 function getRecordDetail(header,data,sucess,fail){
-    var url=app.globalData.Host+"/records/item/"+data.id;
+    var url=app.globalData.Host+"/record/"+data.id;
     wx.request({
         url:url,
         header:{

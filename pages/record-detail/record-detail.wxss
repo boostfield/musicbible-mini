@@ -100,16 +100,33 @@ text.attribute{
     line-height: 50rpx;
     width: 140rpx;
     display: inline-block;
+    vertical-align:top;
 }
 text.value{
     font-size: 28rpx;
     width: 530rpx;
-    height: 50rpx;
     color: #FFFFFF;
     letter-spacing: 0;
     margin-left: 20rpx;
     line-height: 50rpx;
     display: inline-block;
+}
+view.value {
+    width: 530rpx;
+    display: inline-block;
+}
+view.inner-value{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+text.inner-value{
+    font-size: 28rpx;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 50rpx;
+    display: block;
+    white-space: nowrap;
 }
 /*** preview ***/
 .preview{

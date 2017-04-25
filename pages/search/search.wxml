@@ -31,8 +31,8 @@
     <!--associate words-->
     <view class="associate-word-content fitSystemSearchBar" wx:if="{{isShowAssociateWords&&searchContent.length>0}}">
         <block  wx:for="{{associateWords}}">
-            <view class="wrapper" bindtap="actionAssociateWordSearch" data-hotkey="{{item}}">
-                <text class="name"  >{{item}}</text>
+            <view class="wrapper" bindtap="actionAssociateWordSearch" data-hotkey="{{item.suggestion}}">
+                <text class="name"  >{{item.suggestion}}</text>
             </view>
         </block>
     </view>
@@ -48,11 +48,11 @@
 
     <!--搜索列表的模板-->              
     <template name="list-items">
-           <navigator url="../record-detail/record-detail?id={{Id}}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{AppCoverUrl?AppCoverUrl:'../../image/img_record_default.png'}}" mode="scaleToFill" data-index="{{index}}" ></image>
+           <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
+                      <image class="item-image" src="{{cover_url?cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill" data-index="{{index}}" ></image>
                       <view class="item-content">
-                      <text class="title item-title">{{TitleCN}}</text>
-                      <text  class="title item-subtitle">{{TitleEN}}</text>
+                      <text class="title item-title">{{title_cn}}</text>
+                      <text  class="title item-subtitle">{{title_en}}</text>
                       </view>
            </navigator>
     </template>
