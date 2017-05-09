@@ -30,6 +30,10 @@
 
     <!--associate words-->
     <view class="associate-word-content fitSystemSearchBar" wx:if="{{isShowAssociateWords&&searchContent.length>0}}">
+        <view class="keyword-view" bindtap="actionSearchTextSearch">
+          <text class="keyword-hint">搜索 <text class="keyword-text">"{{searchContent}}"</text>
+          </text>
+        </view>
         <block  wx:for="{{associateWords}}">
             <view class="wrapper" bindtap="actionAssociateWordSearch" data-hotkey="{{item.suggestion}}">
                 <text class="name"  >{{item.suggestion}}</text>

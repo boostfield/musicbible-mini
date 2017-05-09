@@ -189,3 +189,18 @@
     margin-top: 6rpx;
    color:rgba(255,255,255,0.3);
 }
+.keyword-view {
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  text-align: center;
+  border-bottom: 1rpx solid rgba(255,255,255,0.2);
+}
+.keyword-hint {
+  color: white;
+  
+  font-size: 32rpx;
+}
+.keyword-text {
+  color: #C1B087;
+  font-size: 32rpx;
+}

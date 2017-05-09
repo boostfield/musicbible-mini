@@ -41,7 +41,11 @@ Page({
            isShowRecordResult:false,
            searchContent:"",
             associateWords:new Array(),
-            record_search:new Object()
+            record_search:{
+             index: 1,
+             pageSize: 10,
+             list: []
+           }
         })
 
     },
@@ -49,7 +53,11 @@ Page({
         //删除input内容
         this.setData({
             isShowRecordResult:false,
-            record_search:new Object(),
+            record_search:{
+              index: 1,
+              pageSize: 10,
+              list: []
+            },
             searchContent:""
         })
     },
@@ -70,20 +78,29 @@ Page({
         console.log("内容 "+e.currentTarget.dataset.hotkey);
         this.setData({
             isShowRealSearchBar:true,
-            isShowAssociateWords:true,
+            isShowRecordResult: true,
+            isShowAssociateWords:false,
             searchContent:e.currentTarget.dataset.hotkey
         })
-        this.reqAssociateWordsData(this.renderAssociateWordsData);
+        this.reqResultData(this.renderResultData, false, this);
+    },
+    actionSearchTextSearch: function (e) {
+      this.setData({
+        isShowRecordResult: true,
+        isShowAssociateWords: false,
+        searchContent: this.data.searchContent
+      })
+      this.reqResultData(this.renderResultData, false, this);
     },
     actionAssociateWordSearch:function(e){
         //点击关联词
         console.log("内容 "+e.currentTarget.dataset.hotkey);
-         this.setData({
+        this.setData({
              isShowRecordResult:true,
              isShowAssociateWords:false,
              searchContent:e.currentTarget.dataset.hotkey
         })
-        this.reqResultData(this.renderResultData,false,this);
+        this.reqResultData(this.renderResultData, false, this);
     },
     onPullDownRefresh:function(){
         console.log("xia la shua xin");
