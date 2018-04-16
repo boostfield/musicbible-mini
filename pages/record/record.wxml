@@ -1,56 +1,42 @@
-<!--index.wxml-->
-<view class="container" >
+<view class="container">
   <!--tabLayout-->
-  <view class="tablayout" >
+   <view class="tablayout">
     <view class="tab tab_recommend" bindtap="recommend_onclick">
-        <text class="title">推荐</text>
-        <view class="divider" hidden="{{tabSelect[0]}}"></view>
+      <text class="title">推荐</text>
+      <view class="divider" hidden="{{tabSelect[0]}}"></view>
     </view>
     <view class="tab tab_latest" bindtap="latest_onclick">
-        <text class="title">最新</text>
-        <view class="divider" hidden="{{tabSelect[1]}}"></view>
+      <text class="title">最新</text>
+      <view class="divider" hidden="{{tabSelect[1]}}"></view>
+    </view>
+  </view> 
+
+  <!--推荐-->
+  <view class="content grid" hidden="{{tabSelect[0]}}">
+    <view class="content_recommend">
+      <navigator class="content_recommend_item" url="../record-detail/record-detail?id={{item.id}}" hover-class="navigator-hover" wx:for="{{record_recommed.list}}" wx:key="{{index}}">
+        <image class="item-image" src="{{item.cover_url ? item.cover_url : '../../image/img_record_default.png'}}" mode="scaleToFill"></image>
+        <view class="title item-title">{{item.title_cn ? item.title_cn : ""}}</view>
+      </navigator>
+    </view>
+    <view class="loading" hidden="{{isHideFooterLoading}}">
+      <text>{{footerString}}</text>
     </view>
   </view>
 
-<scroll-view scroll-y="false" bindbindscrolltolower="lowerhander" class="scroll-view" >
-<!--推荐-->
-  <view class="content content_recommend" hidden="{{tabSelect[0]}}">
-        <view class="grid">
-          <block  wx:for="{{record_recommed.list}}" >
-            <template is="grid-items" data="{{...item}}"/>
-          </block>
+  <!--最新-->
+  <view class="content list" hidden="{{tabSelect[1]}}">
+    <view class="content_latest">
+      <navigator class="content_latest_item" url="../record-detail/record-detail?id={{item.id}}" hover-class="navigator-hover" wx:for="{{record_latest.list}}" wx:key="{{index}}">
+        <image class="item-image" src="{{item.cover_url ? item.cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill"></image>
+        <view class="item-content">
+          <text class="title item-title">{{item.title_cn ? item.title_cn : ""}}</text>
+          <text class="title item-subtitle">{{item.title_en ? item.title_en : ""}}</text>
         </view>
-        <view class="loading" hidden="{{isHideFooterLoading}}"><text>{{footerString}}</text></view>
-  </view>
-
-    <!--最新-->
-  <view class="content content_latest" hidden="{{tabSelect[1]}}">
-    <view class="list">
-            <block  wx:for="{{record_latest.list}}" >
-            <template is="list-items" data="{{...item}}"/>
-            </block>
+      </navigator>
     </view>
-    <view class="loading" hidden="{{isHideFooterLoading}}"><text>{{footerString}}</text></view>
+    <view class="loading" hidden="{{isHideFooterLoading}}">
+      <text>{{footerString}}</text>
+    </view>
   </view>
-  </scroll-view>
-
 </view>
-
-    <!--推荐的模板-->
-    <template name="grid-items">
-        <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{cover_url?cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill"></image>
-                      <text class="title item-title">{{title_cn?title_cn:""}}</text>
-                      <text  class="title item-subtitle">{{title_en?title_en:""}}</text>
-        </navigator>
-      </template>
-    <!--最新的模板-->
-    <template name="list-items">
-            <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{cover_url?cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill"></image>
-                      <view class="item-content">
-                      <text class="title item-title">{{title_cn?title_cn:""}}</text>
-                      <text  class="title item-subtitle">{{title_en?title_en:""}}</text>
-                      </view>
-           </navigator>
-      </template>

@@ -8,7 +8,7 @@ function showLoadingToast(){
 function showNoMoreToast(){
     wx.showToast({
         title: '没有更多了',
-        icon: 'success',
+        icon: 'none',
         duration: 1000
     })  
 }

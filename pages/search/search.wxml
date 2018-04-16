@@ -1,63 +1,65 @@
 <view class="container">
-    <!--search type01-->
-    <view class="seach-content before" bindtap="actionSearch" wx:if="{{!isShowRealSearchBar}}">
-        <view class="search-btn" >
-            <image src="../../image/ic_search.png" ></image>
-            <text>搜索</text>
-        </view>
+  <!--search type01-->
+  <view class="seach-content before" bindtap="actionSearch" wx:if="{{!isShowRealSearchBar}}">
+    <view class="search-btn">
+      <image src="../../image/ic_search.png"></image>
+      <text>搜索</text>
     </view>
+  </view>
 
-    <!--search type02-->
-    <view class="seach-content after"  wx:if="{{isShowRealSearchBar}}">
-        <view class="search-btn" >
-            <view class="content-left">
-                <image class="icon-search" src="../../image/ic_search.png" ></image>
-                <input class="edt-search" placeholder="" auto-focus bindinput="actionKeyInput" value="{{searchContent}}"/>
-             </view>
+  <!--search type02-->
+  <view class="seach-content after" wx:if="{{isShowRealSearchBar}}">
+    <view class="search-btn">
+      <view class="content-left">
+        <image class="icon-search" src="../../image/ic_search.png"></image>
+        <input class="edt-search" placeholder="" auto-focus bindinput="actionKeyInput" value="{{searchContent}}" />
+      </view>
 
-           <image class="icon_delete"src="../../image/ic_search_del.png" bindtap="actionDeleteInputValue"></image>
-        </view>
-         <text class="btn-cancle"  bindtap="actionCancle" >取消</text>
+      <image class="icon_delete" src="../../image/ic_search_del.png" bindtap="actionDeleteInputValue"></image>
     </view>
- 
-    <!--hot key words -->
-    <view class="hot-word-content fitSystemSearchBar" wx:if="{{!isShowRealSearchBar}}">
-        <text class="title">热门关键词</text>
-        <block  wx:for="{{keyWords}}">
-          <text class="name" bindtap="actionHotWordSearch" data-hotkey="{{item}}">{{item}}</text>
-        </block>
-    </view>
+    <text class="btn-cancle" bindtap="actionCancle">取消</text>
+  </view>
 
-    <!--associate words-->
-    <view class="associate-word-content fitSystemSearchBar" wx:if="{{isShowAssociateWords&&searchContent.length>0}}">
-        <view class="keyword-view" bindtap="actionSearchTextSearch">
-          <text class="keyword-hint">搜索 <text class="keyword-text">"{{searchContent}}"</text>
-          </text>
-        </view>
-        <block  wx:for="{{associateWords}}">
-            <view class="wrapper" bindtap="actionAssociateWordSearch" data-hotkey="{{item.suggestion}}">
-                <text class="name"  >{{item.suggestion}}</text>
-            </view>
-        </block>
-    </view>
-    <!--search result-->
-      <view class="content  fitSystemSearchBar" wx:if="{{isShowRecordResult}}">
-                <view class="list">
-                    <block  wx:for="{{record_search.list}}">
-                        <template is="list-items" data="{{...item}}"/>
-                    </block>
-                </view>
-                <view class="loading" hidden="{{isHideFooterLoading}}"><text>{{footerString}}</text></view>
-        </view>
+  <!--hot key words -->
+  <view class="hot-word-content fitSystemSearchBar" wx:if="{{!isShowRealSearchBar}}">
+    <text class="title">热门关键词</text>
+    <block wx:for="{{keyWords}}">
+      <text class="name" bindtap="actionHotWordSearch" data-hotkey="{{item}}">{{item}}</text>
+    </block>
+  </view>
 
-    <!--搜索列表的模板-->              
-    <template name="list-items">
-           <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
-                      <image class="item-image" src="{{cover_url?cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill" data-index="{{index}}" ></image>
-                      <view class="item-content">
-                      <text class="title item-title">{{title_cn}}</text>
-                      <text  class="title item-subtitle">{{title_en}}</text>
-                      </view>
-           </navigator>
-    </template>
+  <!--associate words-->
+  <view class="associate-word-content fitSystemSearchBar" wx:if="{{isShowAssociateWords&&searchContent.length>0}}">
+    <!-- <view class="keyword-view" bindtap="actionSearchTextSearch">
+      <text class="keyword-hint">搜索 <text class="keyword-text">"{{searchContent}}"</text>
+      </text>
+    </view> -->
+    <block wx:for="{{associateWords}}">
+      <view class="wrapper" bindtap="actionAssociateWordSearch" data-hotkey="{{item.suggestion}}">
+        <text class="name">{{item.suggestion}}</text>
+      </view>
+    </block>
+  </view>
+  <!--search result-->
+  <view class="content  fitSystemSearchBar" wx:if="{{isShowRecordResult}}">
+    <view class="list">
+      <block wx:for="{{record_search.list}}">
+        <template is="list-items" data="{{...item}}" />
+      </block>
+    </view>
+    <view class="loading" hidden="{{isHideFooterLoading}}">
+      <text>{{footerString}}</text>
+    </view>
+  </view>
+
+  <!--搜索列表的模板-->
+  <template name="list-items">
+    <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
+      <image class="item-image" src="{{cover_url?cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill" data-index="{{index}}"></image>
+      <view class="item-content">
+        <text class="title item-title">{{title_cn}}</text>
+        <text class="title item-subtitle">{{title_en}}</text>
+      </view>
+    </navigator>
+  </template>
 </view>
