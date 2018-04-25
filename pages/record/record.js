@@ -40,13 +40,15 @@ Page({
     this.reqLatestData(this.renderLatestData, false);
   },
   //请求推荐唱片信息
-  reqRecommendData: function (callback, isAdd) {
+  reqRecommendData: function (callback, isAdd, showLoading = true) {
     var currentPage = this;
     var currentData = currentPage.data;
     currentPage.setData({
       isLoading: true
     })
-    toastUtils.showLoadingToast()
+    if (showLoading) {
+      toastUtils.showLoadingToast()
+    }
     if (isAdd) {
       var index = currentData.record_recommed.index + 1;
     } else {
@@ -88,12 +90,14 @@ Page({
     })
   },
   //请求最新的唱片信息
-  reqLatestData: function (callback, isAdd) {
+  reqLatestData: function (callback, isAdd, showLoading = true) {
     var currentPage = this;
     this.setData({
       isLoading: true
     })
-    toastUtils.showLoadingToast()
+    if (showLoading) {
+      toastUtils.showLoadingToast()
+    }
     if (isAdd) {
       var index = currentPage.data.record_latest.index + 1;
     } else {
@@ -205,16 +209,18 @@ Page({
   //下拉刷新
   onPullDownRefresh: function () {
     console.log("xia la shua xin");
+    wx.showNavigationBarLoading()
     let tabSelect = this.data.tabSelect
     if (tabSelect[0]) {
       //获取推荐唱片列表
-      this.reqRecommendData(this.renderRecommendData, false);
+      this.reqRecommendData(this.renderRecommendData, false, false);
     } else if (tabSelect[1]) {
       //获取最新唱片列表
-      this.reqLatestData(this.renderLatestData, false);
+      this.reqLatestData(this.renderLatestData, false, false);
     }
 
     setTimeout(() => {
+      wx.hideNavigationBarLoading()
       wx.stopPullDownRefresh() //停止下拉刷新
     }, 1500)
   },
