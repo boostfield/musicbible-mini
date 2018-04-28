@@ -12,6 +12,7 @@ Page({
     footerString: FOOTER_LOADING,
     isFirstIn: false,
     isHideFooterLoading: true,
+    isHideArtistFooterLoading: true,
     keyWords: [],
     associateWords: [],
     isShowRealSearchBar: false,
@@ -23,6 +24,14 @@ Page({
       pageSize: 10,
       list: []
     },
+    artist_search: {
+      index: 1,
+      pageSize: 10,
+      list: []
+    },
+    isShowRecordResult: true,
+    isShowArtistResult: false,
+    tabSelected: 0
   },
   onLoad: function () {
     this.reqKeyWordsData(this.renderKeyWordsData);
@@ -45,7 +54,15 @@ Page({
         index: 1,
         pageSize: 10,
         list: []
-      }
+      },
+      artist_search: {
+        index: 1,
+        pageSize: 10,
+        list: []
+      },
+      isShowRecordResult: true,
+      isShowArtistResult: false,
+      tabSelected: 0
     })
 
   },
@@ -58,7 +75,15 @@ Page({
         pageSize: 10,
         list: []
       },
-      searchContent: ""
+      searchContent: "",
+      artist_search: {
+        index: 1,
+        pageSize: 10,
+        list: []
+      },
+      isShowRecordResult: true,
+      isShowArtistResult: false,
+      tabSelected: 0
     })
   },
   actionKeyInput: function (e) {
@@ -83,14 +108,7 @@ Page({
       searchContent: e.currentTarget.dataset.hotkey
     })
     this.reqResultData(this.renderResultData, false, this);
-  },
-  actionSearchTextSearch: function (e) {
-    this.setData({
-      isShowResult: true,
-      isShowAssociateWords: false,
-      searchContent: this.data.searchContent
-    })
-    this.reqResultData(this.renderResultData, false, this);
+    this.reqArtistData(this.renderArtistData, false, this);
   },
   actionAssociateWordSearch: function (e) {
     //点击关联词
@@ -101,6 +119,7 @@ Page({
       searchContent: e.currentTarget.dataset.hotkey
     })
     this.reqResultData(this.renderResultData, false, this);
+    this.reqArtistData(this.renderArtistData, false, this);
   },
   onPullDownRefresh: function () {
     console.log("xia la shua xin");
@@ -114,10 +133,17 @@ Page({
       return;
     }
     console.log("shang la shua xin");
-    this.setData({
-      isHideFooterLoading: false
-    });
-    this.reqResultData(this.renderResultData, true, this);
+    if (this.data.tabSelected == 0) {
+      this.setData({
+        isHideFooterLoading: false,
+      });
+      this.reqResultData(this.renderResultData, true, this);
+    } else if (this.data.tabSelected == 1) {
+      this.setData({
+        isHideArtistFooterLoading: false,
+      });
+      this.reqArtistData(this.renderArtistData, true, this);
+    }
     //延迟加载
     // setTimeout(this.onBottomRefreshSucess,2000);
   },
@@ -126,7 +152,8 @@ Page({
   },
   onBottomRefreshSucess: function () {
     this.setData({
-      isHideFooterLoading: true
+      isHideFooterLoading: true,
+      isHideArtistFooterLoading: true
     });
   },
   //请求关键字数据
@@ -242,6 +269,89 @@ Page({
       record_search: recommendObj
     })
   },
+
+  /**
+   * 艺术家搜索
+   */
+  reqArtistData: function (callback, isAdd, currentPage) {
+    var that = this;
+    //请求搜索结果数据
+    toastUtils.showLoadingToast()
+    if (isAdd) {
+      var index = currentPage.data.artist_search.index + 1;
+    } else {
+      var index = 1;
+    }
+    api.getArtistList(null, {
+      keyword: this.data.searchContent,
+      page: index,
+      pageSize: this.data.artist_search.pageSize
+    }, function (res) {
+      toastUtils.hideToast()
+      if (isAdd) {
+        if (res.data.result.dataList.length > 0) {
+          currentPage.data.artist_search.index = index;
+          currentPage.setData({
+            footerString: FOOTER_LOADING,
+            isHideArtistFooterLoading: true
+          });
+        } else {
+          currentPage.setData({
+            footerString: FOOTER_NO_MORE,
+            isHideArtistFooterLoading: false
+          });
+        }
+        console.log('上拉刷新完成');
+      } else {
+        console.log('下拉刷新完成')
+        wx.stopPullDownRefresh()
+      }
+      console.log(res);
+      callback && callback.call(that, res.data, isAdd)
+    }, function (res) {
+      toastUtils.hideToast();
+      if (isAdd) {
+        console.log('上拉刷新出现问题');
+        currentPage.setData({
+          isHideArtistFooterLoading: true
+        });
+      } else {
+        console.log('下拉刷新出现问题')
+        wx.stopPullDownRefresh()
+      }
+    })
+  },
+  renderArtistData: function (res, isAdd) {
+    //渲染搜索结果唱片数据
+    var recommendObj = this.data.artist_search;
+    var currentLength = recommendObj.list.length;
+
+    var list = res.result.dataList;
+    for (var i = 0; i < list.length; i++) {
+      //唱片图片
+      if (list[i].avatar) {
+        list[i].avatar = imageHelper.imageUrlDispatcher(list[i].avatar, imageHelper.DISKCOVER);
+      }
+      list[i].index = i + currentLength;
+    }
+    if (isAdd) {
+      list = recommendObj.list.concat(list);
+    }
+    recommendObj.list = list;
+    this.setData({
+      artist_search: recommendObj
+    })
+  },
+
+  toggleTab(e) {
+    const index = e.currentTarget.dataset.index
+    this.setData({
+      tabSelected: index,
+      isShowRecordResult: index == 0 ? true : false,
+      isShowArtistResult: index == 1 ? true : false
+    })
+  },
+
   //分享界面
   onShareAppMessage: function () {
     return {

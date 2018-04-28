@@ -20,6 +20,17 @@
     <text class="btn-cancle" bindtap="actionCancle">取消</text>
   </view>
 
+  <view class="tablayout" wx:if="{{isShowResult}}">
+    <view class="tab tab_recommend" bindtap="toggleTab" data-index="0">
+      <text class="title">唱片</text>
+      <view class="divider" hidden="{{tabSelected == 1}}"></view>
+    </view>
+    <view class="tab tab_latest" bindtap="toggleTab" data-index="1">
+      <text class="title">艺术家</text>
+      <view class="divider" hidden="{{tabSelected == 0}}"></view>
+    </view>
+  </view>
+
   <!--hot key words -->
   <view class="hot-word-content fitSystemSearchBar" wx:if="{{!isShowRealSearchBar}}">
     <text class="title">热门关键词</text>
@@ -41,13 +52,31 @@
     </block>
   </view>
   <!--search result-->
-  <view class="content  fitSystemSearchBar" wx:if="{{isShowResult}}">
+  <view class="content  fitSystemSearchBar-result" wx:if="{{isShowResult && isShowRecordResult}}">
     <view class="list">
       <block wx:for="{{record_search.list}}">
         <template is="list-items" data="{{...item}}" />
       </block>
     </view>
     <view class="loading" hidden="{{isHideFooterLoading}}">
+      <text>{{footerString}}</text>
+    </view>
+  </view>
+
+  <!-- 艺术家列表  -->
+  <view class="content  fitSystemSearchBar-result" wx:if="{{isShowResult && isShowArtistResult}}">
+    <view class="list">
+      <block wx:for="{{artist_search.list}}">
+        <navigator url="../artist-detail/artist-detail?id={{item.id}}" hover-class="navigator-hover">
+          <image class="item-image" src="{{item.avatar ? item.avatar : '../../image/img_record_default.png'}}" mode="scaleToFill" data-index="{{index}}"></image>
+          <view class="item-content">
+            <text class="title item-title">{{item.first_name_en + " " + item.last_name_en}}</text>
+            <text class="title item-subtitle">{{item.name_cn}}</text>
+          </view>
+        </navigator>
+      </block>
+    </view>
+    <view class="loading" hidden="{{isHideArtistFooterLoading}}">
       <text>{{footerString}}</text>
     </view>
   </view>
