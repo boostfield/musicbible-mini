@@ -41,7 +41,7 @@
     </block>
   </view>
   <!--search result-->
-  <view class="content  fitSystemSearchBar" wx:if="{{isShowRecordResult}}">
+  <view class="content  fitSystemSearchBar" wx:if="{{isShowResult}}">
     <view class="list">
       <block wx:for="{{record_search.list}}">
         <template is="list-items" data="{{...item}}" />

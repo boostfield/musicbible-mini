@@ -1,6 +1,6 @@
 <view class="container">
   <!--tabLayout-->
-   <view class="tablayout">
+  <view class="tablayout">
     <view class="tab tab_recommend" bindtap="recommend_onclick">
       <text class="title">推荐</text>
       <view class="divider" hidden="{{tabSelect[0]}}"></view>
@@ -9,7 +9,7 @@
       <text class="title">最新</text>
       <view class="divider" hidden="{{tabSelect[1]}}"></view>
     </view>
-  </view> 
+  </view>
 
   <!--推荐-->
   <view class="content grid" hidden="{{tabSelect[0]}}">
