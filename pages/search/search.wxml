@@ -68,7 +68,7 @@
     <view class="list">
       <block wx:for="{{artist_search.list}}">
         <navigator url="../artist-detail/artist-detail?id={{item.id}}" hover-class="navigator-hover">
-          <image class="item-image" src="{{item.avatar ? item.avatar : '../../image/img_record_default.png'}}" mode="scaleToFill" data-index="{{index}}"></image>
+          <image class="item-image" src="{{item.avatar ? item.avatar : '../../image/img_record_default.png'}}" mode="aspectFill" data-index="{{index}}"></image>
           <view class="item-content">
             <text class="title item-title">{{item.first_name_en + " " + item.last_name_en}}</text>
             <text class="title item-subtitle">{{item.name_cn}}</text>
@@ -84,7 +84,7 @@
   <!--搜索列表的模板-->
   <template name="list-items">
     <navigator url="../record-detail/record-detail?id={{id}}" hover-class="navigator-hover">
-      <image class="item-image" src="{{cover_url?cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill" data-index="{{index}}"></image>
+      <image class="item-image" src="{{cover_url?cover_url:'../../image/img_record_default.png'}}" mode="aspectFill" data-index="{{index}}"></image>
       <view class="item-content">
         <text class="title item-title">{{title_cn}}</text>
         <text class="title item-subtitle">{{title_en}}</text>

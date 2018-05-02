@@ -3,7 +3,8 @@
     "pages/splash/splash",
     "pages/record/record",
     "pages/search/search",
-    "pages/record-detail/record-detail"
+    "pages/record-detail/record-detail",
+    "pages/artist-detail/artist-detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -36,5 +37,5 @@
     "request": 10000,
     "downloadFile": 10000
   },
-  "debug": true
+  "debug": false
 }

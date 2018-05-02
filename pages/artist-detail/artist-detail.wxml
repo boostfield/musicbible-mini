@@ -1,0 +1,44 @@
+<view class="content-parent">
+  <image src="{{detail.avatar}}" mode='widthFix' class="avatar"></image>
+  <view class="artist_name_en">{{detail.first_name_en + " " + detail.last_name_en}}</view>
+  <view class="artist_name_cn">{{detail.name_cn}}</view>
+
+  <!-- tab layout -->
+  <view class="tablayout">
+    <view class="tab" bindtap="toggleTab" data-index="0">
+      <text class="title">唱片</text>
+      <view class="divider" hidden="{{tabSelected == 1}}"></view>
+    </view>
+    <view class="tab" bindtap="toggleTab" data-index="1">
+      <text class="title">介绍</text>
+      <view class="divider" hidden="{{tabSelected == 0}}"></view>
+    </view>
+  </view>
+
+  <!-- 唱片 -->
+  <view hidden="{{tabSelected == 1}}">
+    <view class="content grid" wx:if="{{records.list.length > 0}}">
+      <view class="content_recommend">
+        <navigator class="content_recommend_item" url="../record-detail/record-detail?id={{item.id}}" hover-class="navigator-hover" wx:for="{{records.list}}" wx:key="{{index}}">
+          <image class="item-image" src="{{item.cover_url ? item.cover_url : '../../image/img_record_default.png'}}" mode="scaleToFill"></image>
+          <view class="title item-title">{{item.title_cn ? item.title_cn : ""}}</view>
+        </navigator>
+      </view>
+      <view class="loading" hidden="{{isHideFooterLoading}}">
+        <text>{{footerString}}</text>
+      </view>
+    </view>
+    <view class="empty-view" wx:if="{{records.list.length == 0}}">
+      <text>暂无数据</text>
+    </view>
+  </view>
+
+  <!-- 介绍 -->
+  <view hidden="{{tabSelected == 0}}">
+    <view class="info" wx:if="{{detail.info.length > 0}}">{{detail.info}}</view>
+    <view class="empty-view" wx:if="{{detail.info.length == 0}}">
+      <text>暂无数据</text>
+    </view>
+  </view>
+
+</view>

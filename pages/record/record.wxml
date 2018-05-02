@@ -15,7 +15,7 @@
   <view class="content grid" hidden="{{tabSelect[0]}}">
     <view class="content_recommend">
       <navigator class="content_recommend_item" url="../record-detail/record-detail?id={{item.id}}" hover-class="navigator-hover" wx:for="{{record_recommed.list}}" wx:key="{{index}}">
-        <image class="item-image" src="{{item.cover_url ? item.cover_url : '../../image/img_record_default.png'}}" mode="scaleToFill"></image>
+        <image class="item-image" src="{{item.cover_url ? item.cover_url : '../../image/img_record_default.png'}}" mode="aspectFill"></image>
         <view class="title item-title">{{item.title_cn ? item.title_cn : ""}}</view>
       </navigator>
     </view>
@@ -28,7 +28,7 @@
   <view class="content list" hidden="{{tabSelect[1]}}">
     <view class="content_latest">
       <navigator class="content_latest_item" url="../record-detail/record-detail?id={{item.id}}" hover-class="navigator-hover" wx:for="{{record_latest.list}}" wx:key="{{index}}">
-        <image class="item-image" src="{{item.cover_url ? item.cover_url:'../../image/img_record_default.png'}}" mode="scaleToFill"></image>
+        <image class="item-image" src="{{item.cover_url ? item.cover_url:'../../image/img_record_default.png'}}" mode="aspectFill"></image>
         <view class="item-content">
           <text class="title item-title">{{item.title_cn ? item.title_cn : ""}}</text>
           <text class="title item-subtitle">{{item.title_en ? item.title_en : ""}}</text>
