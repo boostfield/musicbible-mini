@@ -62,7 +62,7 @@ Page({
 
   renderArtistDetail: function (res) {
     const detail = res.result
-    detail.avatar = imageHelper.imageUrlDispatcher(detail.avatar, imageHelper.ORIGIN);
+    detail.avatar = imageHelper.imageUrlDispatcher(detail.avatar, imageHelper.DISKCOVER);
     if (detail.info_sections && detail.info_sections.length > 0) {
       detail.info = detail.info_sections[0].text
     } else {
@@ -134,7 +134,7 @@ Page({
     this.setData({
       isHideFooterLoading: false
     });
-    if (this.data.tabSelected == 0) {
+    if (this.data.tabSelected == 1) {
       this.reqArtistRecord(this.renderArtistRecord, true);
     }
   },

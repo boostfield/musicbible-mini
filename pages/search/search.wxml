@@ -82,7 +82,7 @@
       </view>
     </view>
     <view wx:if="{{artist_search.list.length == 0}}" class="empty-view">
-      <emptyView ></emptyView>
+      <emptyView innerText="暂无艺术家"></emptyView>
     </view>
   </view>
 

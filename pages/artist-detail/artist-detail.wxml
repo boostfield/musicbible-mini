@@ -6,17 +6,17 @@
   <!-- tab layout -->
   <view class="tablayout">
     <view class="tab" bindtap="toggleTab" data-index="0">
-      <text class="title">唱片</text>
+      <text class="title">介绍</text>
       <view class="divider" hidden="{{tabSelected == 1}}"></view>
     </view>
     <view class="tab" bindtap="toggleTab" data-index="1">
-      <text class="title">介绍</text>
+      <text class="title">唱片</text>
       <view class="divider" hidden="{{tabSelected == 0}}"></view>
     </view>
   </view>
 
   <!-- 唱片 -->
-  <view hidden="{{tabSelected == 1}}">
+  <view hidden="{{tabSelected == 0}}">
     <view class="content grid" wx:if="{{records.list.length > 0}}">
       <view class="content_recommend">
         <navigator class="content_recommend_item" url="../record-detail/record-detail?id={{item.id}}" hover-class="navigator-hover" wx:for="{{records.list}}" wx:key="{{index}}">
@@ -28,13 +28,13 @@
         <text>{{footerString}}</text>
       </view>
     </view>
-    <emptyView wx:if="{{records.list.length == 0}}"></emptyView>
+    <emptyView wx:if="{{records.list.length == 0}}" innerText="暂无唱片"></emptyView>
   </view>
 
   <!-- 介绍 -->
-  <view hidden="{{tabSelected == 0}}">
+  <view hidden="{{tabSelected == 1}}">
     <view class="info" wx:if="{{detail.info.length > 0}}">{{detail.info}}</view>
-    <emptyView wx:if="{{detail.info.length == 0}}"></emptyView>
+    <emptyView wx:if="{{detail.info.length == 0}}" innerText="暂无介绍"></emptyView>
   </view>
 
 </view>
