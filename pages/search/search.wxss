@@ -251,3 +251,7 @@
   bottom: 0rpx;
   left: 102.5rpx;
 }
+
+.empty-view {
+  margin-top: 400rpx;
+}

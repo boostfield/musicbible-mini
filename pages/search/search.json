@@ -1,3 +1,6 @@
 {
-    "backgroundTextStyle": "light"
+    "backgroundTextStyle": "light",
+    "usingComponents": {
+      "emptyView": "../../components/emptyView/emptyView"
+    }
 }

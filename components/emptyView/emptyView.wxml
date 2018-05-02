@@ -1,0 +1,3 @@
+<view class="empty-view">
+  <text>{{innerText}}</text>
+</view>

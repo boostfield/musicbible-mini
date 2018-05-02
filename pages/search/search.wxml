@@ -64,20 +64,25 @@
   </view>
 
   <!-- 艺术家列表  -->
-  <view class="content  fitSystemSearchBar-result" wx:if="{{isShowResult && isShowArtistResult}}">
-    <view class="list">
-      <block wx:for="{{artist_search.list}}">
-        <navigator url="../artist-detail/artist-detail?id={{item.id}}" hover-class="navigator-hover">
-          <image class="item-image" src="{{item.avatar ? item.avatar : '../../image/img_record_default.png'}}" mode="aspectFill" data-index="{{index}}"></image>
-          <view class="item-content">
-            <text class="title item-title">{{item.first_name_en + " " + item.last_name_en}}</text>
-            <text class="title item-subtitle">{{item.name_cn}}</text>
-          </view>
-        </navigator>
-      </block>
+  <view wx:if="{{isShowResult && isShowArtistResult}}">
+    <view class="content fitSystemSearchBar-result" wx:if="{{artist_search.list.length > 0}}">
+      <view class="list">
+        <block wx:for="{{artist_search.list}}">
+          <navigator url="../artist-detail/artist-detail?id={{item.id}}" hover-class="navigator-hover">
+            <image class="item-image" src="{{item.avatar ? item.avatar : '../../image/img_record_default.png'}}" mode="aspectFill" data-index="{{index}}"></image>
+            <view class="item-content">
+              <text class="title item-title">{{item.first_name_en + " " + item.last_name_en}}</text>
+              <text class="title item-subtitle">{{item.name_cn}}</text>
+            </view>
+          </navigator>
+        </block>
+      </view>
+      <view class="loading" hidden="{{isHideArtistFooterLoading}}">
+        <text>{{footerString}}</text>
+      </view>
     </view>
-    <view class="loading" hidden="{{isHideArtistFooterLoading}}">
-      <text>{{footerString}}</text>
+    <view wx:if="{{artist_search.list.length == 0}}" class="empty-view">
+      <emptyView ></emptyView>
     </view>
   </view>
 

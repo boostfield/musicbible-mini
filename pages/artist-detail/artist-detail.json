@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "艺术家详情",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "emptyView": "../../components/emptyView/emptyView"
+  }
 }

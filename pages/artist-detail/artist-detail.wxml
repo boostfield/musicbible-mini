@@ -28,17 +28,13 @@
         <text>{{footerString}}</text>
       </view>
     </view>
-    <view class="empty-view" wx:if="{{records.list.length == 0}}">
-      <text>暂无数据</text>
-    </view>
+    <emptyView wx:if="{{records.list.length == 0}}"></emptyView>
   </view>
 
   <!-- 介绍 -->
   <view hidden="{{tabSelected == 0}}">
     <view class="info" wx:if="{{detail.info.length > 0}}">{{detail.info}}</view>
-    <view class="empty-view" wx:if="{{detail.info.length == 0}}">
-      <text>暂无数据</text>
-    </view>
+    <emptyView wx:if="{{detail.info.length == 0}}"></emptyView>
   </view>
 
 </view>
