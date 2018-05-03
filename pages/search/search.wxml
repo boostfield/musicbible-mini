@@ -57,14 +57,19 @@
     </view>
   </view>
   <!--search result-->
-  <view class="content  fitSystemSearchBar-result" wx:if="{{isShowResult && isShowRecordResult}}">
-    <view class="list">
-      <block wx:for="{{record_search.list}}">
-        <template is="list-items" data="{{...item}}" />
-      </block>
+  <view wx:if="{{isShowResult && isShowRecordResult}}">
+    <view class="content  fitSystemSearchBar-result" wx:if="{{record_search.list.length > 0}}">
+      <view class="list">
+        <block wx:for="{{record_search.list}}">
+          <template is="list-items" data="{{...item}}" />
+        </block>
+      </view>
+      <view class="loading" hidden="{{isHideFooterLoading}}">
+        <text>{{footerString}}</text>
+      </view>
     </view>
-    <view class="loading" hidden="{{isHideFooterLoading}}">
-      <text>{{footerString}}</text>
+    <view wx:if="{{record_search.list.length == 0}}" class="empty-view">
+      <emptyView innerText="暂无唱片"></emptyView>
     </view>
   </view>
 
