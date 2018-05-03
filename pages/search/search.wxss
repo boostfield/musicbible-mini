@@ -139,6 +139,29 @@
   letter-spacing: 0.3px;
 }
 
+.associate-word-content .title {
+  color: #c1b087;
+  font-size: 32rpx;
+  margin: 20rpx 0;
+}
+
+.associate-word-content .suggestion {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 20rpx 0;
+}
+
+.associate-word-content .divider {
+  height: 1rpx;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 20rpx 0;
+}
+
+.associate-word-content .category {
+  margin: 0 30rpx;
+}
+
 /***search result***/
 
 .content {

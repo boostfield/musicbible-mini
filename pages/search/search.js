@@ -97,6 +97,7 @@ Page({
       searchContent: content
     })
     this.reqAssociateWordsData(this.renderAssociateWordsData);
+    this.reqArtistAssociateWordsData(this.renderArtistAssociateWordsData);
   },
   actionHotWordSearch: function (e) {
     //点击热门词
@@ -126,6 +127,7 @@ Page({
     setTimeout(this.onPullDownRefreshSuccess, 2000);
   },
   onReachBottom: function () {
+    if (this.data.isShowAssociateWords) return
     if (!this.data.isFirstIn) {
       this.setData({
         isFirstIn: true
@@ -194,12 +196,43 @@ Page({
   renderAssociateWordsData: function (res) {
     console.log("test02" + res.result.length);
     var newAssociateWords = res.result;
-    if (newAssociateWords.length > 0) {
-      this.setData({
-        associateWords: newAssociateWords
-      })
+    if (newAssociateWords && newAssociateWords.length > 8) {
+      newAssociateWords = newAssociateWords.slice(0, 8)
     }
+    this.setData({
+      associateWords: newAssociateWords
+    })
   },
+
+  /**
+   * 请求艺术家关联词
+   */
+  reqArtistAssociateWordsData: function (callback) {
+    var that = this;
+    var words = this.data.searchContent;
+    if (!words) {
+      return;
+    }
+
+    api.getArtistAssociateWords(null, {
+      keyword: words
+    }, function (res) {
+      callback && callback.call(that, res.data, false)
+    }, function (res) {
+      console.log('获取关联词错误');
+    })
+  },
+  /**
+   * 渲染艺术家关联词
+   */
+  renderArtistAssociateWordsData: function (res) {
+    console.log("test02" + res.result.length);
+    var newAssociateWords = res.result;
+    this.setData({
+      artistAssociateWords: newAssociateWords
+    })
+  },
+
   reqResultData: function (callback, isAdd, currentPage) {
     var that = this;
     //请求搜索结果数据

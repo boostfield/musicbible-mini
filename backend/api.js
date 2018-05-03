@@ -10,6 +10,7 @@ module.exports = {
   getArtistList: getArtistList,
   getArtistDetail: getArtistDetail,
   getArtistRecord: getArtistRecord,
+  getArtistAssociateWords: getArtistAssociateWords
 }
 
 
@@ -84,6 +85,28 @@ function getHotKeyWords(header, data, sucess, fail) {
 //获取搜索关联词列表 5个
 function getAssociateWords(header, data, sucess, fail) {
   var url = app.globalData.Host + '/suggest?suggest=record&&keyword=' + data.keyword;
+  wx.request({
+    url: url,
+    header: {
+      'content-type': 'application/json',
+      'Accept': 'application/json',
+    },
+    method: 'GET',
+    data: {},
+    success: function (res) {
+      sucess(res);
+    },
+    fail: function (res) {
+      fail(res);
+    }
+  });
+}
+
+/**
+ * 搜索艺术家关联词
+ */
+function getArtistAssociateWords(header, data, sucess, fail) {
+  var url = app.globalData.Host + '/suggest?suggest=artist&&keyword=' + data.keyword;
   wx.request({
     url: url,
     header: {

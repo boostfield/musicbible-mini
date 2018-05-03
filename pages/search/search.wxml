@@ -14,7 +14,6 @@
         <image class="icon-search" src="../../image/ic_search.png"></image>
         <input class="edt-search" placeholder="" auto-focus bindinput="actionKeyInput" value="{{searchContent}}" />
       </view>
-
       <image class="icon_delete" src="../../image/ic_search_del.png" bindtap="actionDeleteInputValue"></image>
     </view>
     <text class="btn-cancle" bindtap="actionCancle">取消</text>
@@ -40,16 +39,22 @@
   </view>
 
   <!--associate words-->
-  <view class="associate-word-content fitSystemSearchBar" wx:if="{{isShowAssociateWords&&searchContent.length>0}}">
-    <!-- <view class="keyword-view" bindtap="actionSearchTextSearch">
-      <text class="keyword-hint">搜索 <text class="keyword-text">"{{searchContent}}"</text>
-      </text>
-    </view> -->
-    <block wx:for="{{associateWords}}">
-      <view class="wrapper" bindtap="actionAssociateWordSearch" data-hotkey="{{item.suggestion}}">
-        <text class="name">{{item.suggestion}}</text>
+  <view class="associate-word-content fitSystemSearchBar" wx:if="{{isShowAssociateWords && searchContent.length>0}}">
+    <view class="category" wx:if="{{associateWords.length > 0}}">
+      <view class="title">
+        <text>搜索唱片</text>
+        <text>{{'“' + searchContent + '”'}}</text>
       </view>
-    </block>
+      <view class="suggestion" wx:for="{{associateWords}}" wx:key="{{index}}" bindtap="actionAssociateWordSearch" data-hotkey="{{item.suggestion}}">{{item.suggestion}}</view>
+    </view>
+    <view class="divider" wx:if="{{associateWords.length > 0 || artistAssociateWords.length > 0}}"></view>
+    <view class="category" wx:if="{{artistAssociateWords.length > 0}}">
+      <view class="title">
+        <text>搜索艺术家</text>
+        <text>{{'“' + searchContent + '”'}}</text>
+      </view>
+      <view class="suggestion" wx:for="{{artistAssociateWords}}" wx:key="{{index}}" bindtap="actionAssociateWordSearch" data-hotkey="{{item.suggestion}}">{{item.suggestion}}</view>
+    </view>
   </view>
   <!--search result-->
   <view class="content  fitSystemSearchBar-result" wx:if="{{isShowResult && isShowRecordResult}}">
